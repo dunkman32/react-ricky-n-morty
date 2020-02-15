@@ -1,0 +1,4 @@
+.background-episode {
+    background-image: url('../static/pattern.svg');
+    min-height: 100vh;
+}
