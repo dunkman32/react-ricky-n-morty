@@ -18,6 +18,23 @@ const getCharactersById = (ids) => {
 	};
 };
 
+const getCharacters = (page) => {
+	return dispatch => {
+		axios.get(`https://rickandmortyapi.com/api/character/${page}`).then(res => {
+			const characters = res.data;
+			dispatch({
+				type: 'GET_CHARACTERS',
+				characters
+			});
+		}).catch(e => {
+			dispatch(NotificationHandler(NOTIFICATION_ERROR, `Server error - ${e.message}`));
+		});
+	};
+};
+
+
+
 export {
-	getCharactersById
+	getCharactersById,
+	getCharacters,
 };
