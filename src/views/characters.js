@@ -13,26 +13,26 @@ import Footer from '../components/footer';
 import './characters.css';
 
 const Characters = props => {
-	const {charactersReducer} = props;
+	const {charactersReducer, history, getCharacters} = props;
 	const color = randomColor({luminosity: 'dark'});
 
 	useEffect(() => {
-		props.getCharacters();
+		getCharacters();
 	}, []);
 
 	return (
 		<div className={'characters-bg'}>
 			<>
-				{props.charactersReducer.results ?
+				{charactersReducer.results ?
 					<Paper style={{
 						width: '80%',
 						margin: '0 auto'
 					}}>
-						<CharactersTable rows={charactersReducer.results} history={history}/>
+						<CharactersTable info={charactersReducer.info} rows={charactersReducer.results} history={history}/>
 					</Paper>
 					: <Loading/>}
 			</>
-			<Footer color={'white'} hurtColor={color} fixed={false}/>
+			<Footer color={'black'} hurtColor={color} fixed={false}/>
 		</div>
 	);
 };
