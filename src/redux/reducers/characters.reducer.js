@@ -7,7 +7,13 @@ const CharactersReducer = (state = defaultState, action) => {
 	case 'GET_CHARACTERS_BY_ID':
 		return {
 			...state,
-			characters: action.characters
+			characters: action.characters,
+		};
+	case 'GET_CHARACTERS':
+		return {
+			...state,
+			info: action.info,
+			results: action.results,
 		};
 	default:
 		return state;

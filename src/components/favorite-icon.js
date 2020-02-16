@@ -47,7 +47,7 @@ const FavoriteIcon = (props) => {
 };
 
 FavoriteIcon.propTypes = {
-	id: PropTypes.number,
+	id: PropTypes.any.isRequired,
 };
 
 

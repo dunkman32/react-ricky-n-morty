@@ -1,22 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TableContainer from '@material-ui/core/TableContainer';
+import Table from '@material-ui/core/Table';
 import EnhancedTableHead from './table-head';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import FavoriteIcon from './favorite-icon';
+import TablePagination from '@material-ui/core/TablePagination';
+import {makeStyles} from '@material-ui/core/styles';
 import {getComparator, stableSort} from '../utils/table-utils';
+import PropTypes from 'prop-types';
+import CharactersImageDialog from './characters-image-dialog';
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
 	{id: 'name', disablePadding: false, label: 'Name'},
-	{id: 'episode', diablePadding: false, label: 'Code'},
-	{id: 'air_date', disablePadding: false, label: 'Air Date'},
+	{id: 'image', disablePadding: false, label: 'Image'},
+	{id: 'status', disablePadding: false, label: 'Status'},
+	{id: 'species', disablePadding: false, label: 'Species'},
+	{id: 'gender', diablePadding: false, label: 'Gender'},
 	{id: 'actions', disablePadding: false, label: 'Actions'},
 ];
 
@@ -31,6 +34,9 @@ const useStyles = makeStyles(theme => ({
 	table: {
 		minWidth: 750,
 	},
+	image: {
+		width: 48,
+	},
 	visuallyHidden: {
 		border: 0,
 		clip: 'rect(0 0 0 0)',
@@ -43,15 +49,16 @@ const useStyles = makeStyles(theme => ({
 		width: 1,
 	},
 }));
-
-const EpisodesTable = props => {
+const CharactersTable = props => {
 	const classes = useStyles();
+	const {rows} = props;
+
+	const [openImageDialog, setOpenImageDialog] = React.useState(false);
 	const [order, setOrder] = React.useState('asc');
+	const [image, setImage] = React.useState(null);
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-	const {rows} = props;
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -62,7 +69,7 @@ const EpisodesTable = props => {
 	const handleClick = (event, id) => {
 		console.log(props);
 		event.preventDefault();
-		props.history.push(`/episode/${id}`);
+		// props.history.push(`/characters/${id}`);
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -75,6 +82,7 @@ const EpisodesTable = props => {
 	};
 
 	const emptyRows = rows ? rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage) : 20;
+
 	return (
 		<div className={classes.root}>
 			{rows && <Paper className={classes.paper}>
@@ -115,14 +123,25 @@ const EpisodesTable = props => {
 											<TableCell onClick={event => handleClick(event, row.id)}>
 												{row.name}
 											</TableCell>
-											<TableCell onClick={event => handleClick(event, row.id)}>
-												{row.air_date}
+											<TableCell onClick={(e) => {
+												e.preventDefault();
+												console.log('sasassa');
+												setOpenImageDialog(true);
+												setImage(row.image);
+											}}>
+												<img src={row.image} alt="character" className={classes.image}/>
 											</TableCell>
 											<TableCell onClick={event => handleClick(event, row.id)}>
-												{row.episode}
+												{row.status}
+											</TableCell>
+											<TableCell onClick={event => handleClick(event, row.id)}>
+												{row.species}
+											</TableCell>
+											<TableCell onClick={event => handleClick(event, row.id)}>
+												{row.gender}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon style={{zIndex: 1000}} id={row.id}/>
+												<FavoriteIcon style={{zIndex: 1000}} id={`characters-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);
@@ -145,13 +164,18 @@ const EpisodesTable = props => {
 					onChangeRowsPerPage={handleChangeRowsPerPage}
 				/>
 			</Paper>}
+			<CharactersImageDialog open={openImageDialog}
+				setOpen={setOpenImageDialog}
+				image={image}/>
 		</div>
 	);
 };
 
-EpisodesTable.propTypes = {
+
+CharactersTable.propTypes = {
+	info: PropTypes.object.isRequired,
 	rows: PropTypes.array.isRequired,
 	history: PropTypes.object.isRequired,
 };
 
-export default EpisodesTable;
+export default CharactersTable;

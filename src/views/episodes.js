@@ -6,11 +6,11 @@ import {Paper} from '@material-ui/core';
 //methods
 import {getEpisodes} from '../redux/actions/episodes.action';
 //components
-import EnhancedTable from '../components/episodes-table';
 import Loading from '../components/loading/loading';
+import Footer from '../components/footer';
+import EpisodesTable from '../components/episodes-table';
 //css
 import './episodes.css';
-import Footer from '../components/footer';
 
 const Episodes = props => {
 	const {history, episodesReducer} = props;
@@ -23,16 +23,16 @@ const Episodes = props => {
 	return (
 		<div className='background'>
 			<div style={{height: 50}}></div>
-			<div>
-				{props.episodesReducer.results ?
+			<>
+				{episodesReducer.results ?
 					<Paper style={{
 						width: '80%',
 						margin: '0 auto'
 					}}>
-						<EnhancedTable rows={episodesReducer.results} history={history}/>
+						<EpisodesTable rows={episodesReducer.results} history={history}/>
 					</Paper>
 					: <Loading/>}
-			</div>
+			</>
 			<Footer color={'white'} hurtColor={color} fixed={false}/>
 		</div>
 	);
