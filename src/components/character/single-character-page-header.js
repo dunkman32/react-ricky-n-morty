@@ -1,20 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Css from './cheared.module.css';
-import FavoriteIcon from '../favorite-icon';
 import Grid from '@material-ui/core/Grid';
+import FavoriteIcon from '../favorite-icon';
+import Css from './cheared.module.css';
 
 const SingleCharacterPageHeader = props => {
 	const {data} = props;
-	// const data = {
-	// 	id: '12',
-	// 	name: 'Ricky',
-	// 	status: 'Alive',
-	// 	species: 'Human',
-	// 	type: 'type',
-	// 	gender: 'Man',
-	// 	image: img
-	// };
 	return (
 		<div className={Css.main}>
 			<div className={Css.upper}>

@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
-import './styles/character.css';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
 import SingleCharacterPageHeader from '../components/character/single-character-page-header';
 import SingleCharacterEpisodeTable from '../components/character/single-character-episode-table';
 import {getCharacter} from '../redux/actions/character.action';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import Loading from '../components/loading/loading';
+
+import './styles/sheared.css';
+import './styles/character.css';
 
 const Character = (props) => {
 
@@ -14,10 +17,10 @@ const Character = (props) => {
 
 	useEffect(() => {
 		getCharacter(id);
-	}, [id]);
+	});
 
 	return (
-		<div>
+		<div className={'main'}>
 			{characterReducer.character ? <>
 				<SingleCharacterPageHeader data={characterReducer.character}/>
 				<SingleCharacterEpisodeTable history={history}/>

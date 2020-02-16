@@ -1,16 +1,18 @@
 import React, {useEffect} from 'react';
 import Paper from '@material-ui/core/Paper';
-import SingleEpisodeKeysList from '../components/single-episode-keys-list';
-import {getEpisode} from '../redux/actions/episode.action';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import Loading from '../components/loading/loading';
-import SingleEpisodeCharactersList from '../components/single-episode-characters-list';
-import './styles/episode.css';
-import './styles/sheared.css';
 import Divider from '@material-ui/core/Divider';
+import Loading from '../components/loading/loading';
+
+import SingleEpisodeCharactersList from '../components/single-episode-characters-list';
+import SingleEpisodeKeysList from '../components/single-episode-keys-list';
+import {getEpisode} from '../redux/actions/episode.action';
 import IntegrationFbComments from '../components/integration-fb-comments';
 import SingleEpisodeSkeleton from '../components/skeletons/single-episode-skeleton';
+
+import './styles/episode.css';
+import './styles/sheared.css';
 
 const Episode = (props) => {
 	const {episodeReducer, match} = props;
@@ -18,7 +20,7 @@ const Episode = (props) => {
 
 	useEffect(() => {
 		props.getEpisode(id);
-	}, [id]);
+	});
 
 	return (
 		<div className='main'>

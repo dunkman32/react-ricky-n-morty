@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
-import EpisodesTable from '../episodes/episodes-table';
 import PropTypes from 'prop-types';
-import {getEpisodesById} from '../../redux/actions/episodes.action';
 import {connect} from 'react-redux';
+
+import EpisodesTable from '../episodes/episodes-table';
 import Loading from '../loading/loading';
+import {getEpisodesById} from '../../redux/actions/episodes.action';
+
 import Css from './cheared.module.css';
 
 const SingleCharacterEpisodeTable = props => {
@@ -16,7 +18,7 @@ const SingleCharacterEpisodeTable = props => {
 	useEffect(() => {
 		console.log(takeEpisodesId(character.episode), '123');
 		getEpisodesById(takeEpisodesId(character.episode));
-	}, [character.episode]);
+	});
 
 	const returnEpisodesArray = episodes => (episodes instanceof Array) ? episodes : [episodes];
 

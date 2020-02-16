@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import EpisodeCardForMobile from './episode-card-for-mobile';
 
 const EpisodesTableForMobile = props => {

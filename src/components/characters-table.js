@@ -1,16 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
-import EnhancedTableHead from './table-head';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import FavoriteIcon from './favorite-icon';
 import TablePagination from '@material-ui/core/TablePagination';
 import {makeStyles} from '@material-ui/core/styles';
+
+import FavoriteIcon from './favorite-icon';
+import EnhancedTableHead from './table-head';
 import {getComparator, stableSort} from '../utils/table-utils';
-import PropTypes from 'prop-types';
 import CharactersImageDialog from './characters-image-dialog';
 
 const headCells = [
@@ -67,9 +68,8 @@ const CharactersTable = props => {
 	};
 
 	const handleClick = (event, id) => {
-		console.log(props);
 		event.preventDefault();
-		// props.history.push(`/characters/${id}`);
+		props.history.push(`/character/${id}`);
 	};
 
 	const handleChangePage = (event, newPage) => {

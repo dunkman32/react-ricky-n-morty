@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+
 import FavoriteIcon from '../favorite-icon';
 
 const EpisodeCardForMobile = (props) => {
