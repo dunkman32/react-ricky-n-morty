@@ -9,12 +9,13 @@ import {getEpisodes} from '../redux/actions/episodes.action';
 import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
 import EpisodesTable from '../components/episodes-table';
+import TableSkeleton from '../components/skeletons/table-skeleton';
 //css
 import './episodes.css';
 
 const Episodes = props => {
 	const {history, episodesReducer} = props;
-	const color = randomColor({ luminosity: 'dark' });
+	const color = randomColor({luminosity: 'dark'});
 
 	useEffect(() => {
 		props.getEpisodes();
@@ -31,9 +32,12 @@ const Episodes = props => {
 					}}>
 						<EpisodesTable rows={episodesReducer.results} history={history}/>
 					</Paper>
-					: <Loading/>}
+					: <>
+						<TableSkeleton/> 
+						<Loading/>
+					</>}
 			</>
-			<Footer color={'white'} hurtColor={color} fixed={false}/>
+			<Footer color={'white'} hurtColor={color} fixed={!episodesReducer.results}/>
 		</div>
 	);
 };

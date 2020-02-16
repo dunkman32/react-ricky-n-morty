@@ -9,6 +9,7 @@ import {getCharacters} from '../redux/actions/characters.action';
 import CharactersTable from '../components/characters-table';
 import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
+import TableSkeleton from '../components/skeletons/table-skeleton';
 
 import './characters.css';
 
@@ -30,9 +31,12 @@ const Characters = props => {
 					}}>
 						<CharactersTable info={charactersReducer.info} rows={charactersReducer.results} history={history}/>
 					</Paper>
-					: <Loading/>}
+					: <>
+						<TableSkeleton/>
+						<Loading/>
+					</>}
 			</>
-			<Footer color={'black'} hurtColor={color} fixed={false}/>
+			<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.results}/>
 		</div>
 	);
 };
