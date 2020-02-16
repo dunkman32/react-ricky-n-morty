@@ -20,11 +20,12 @@ const getCharactersById = (ids) => {
 
 const getCharacters = (page) => {
 	return dispatch => {
-		axios.get(`https://rickandmortyapi.com/api/character/${page}`).then(res => {
-			const characters = res.data;
+		axios.get(`https://rickandmortyapi.com/api/character?page=${page}`).then(res => {
+			const {results, info} = res.data;
 			dispatch({
 				type: 'GET_CHARACTERS',
-				characters
+				results,
+				info
 			});
 		}).catch(e => {
 			dispatch(NotificationHandler(NOTIFICATION_ERROR, `Server error - ${e.message}`));
