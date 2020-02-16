@@ -8,6 +8,14 @@
     box-shadow: 0 3px 13px 3px rgba(119, 119, 119, 0.75);
 }
 
+.table {
+    position: relative;
+    top: 52vh;
+    width: 96%;
+    left: 2%;
+    right: 2%;
+}
+
 .upper {
     position: absolute;
     top: 0;
@@ -79,6 +87,10 @@
     .infos {
         height: calc(42vh - 22vh);
     }
+
+    .table {
+        top: 47vh;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -97,6 +109,11 @@
     .infos {
         height: calc(39vh - 20vh);
     }
+
+
+    .table {
+        top: 44vh;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -114,6 +131,10 @@
 
     .infos {
         height: calc(36vh - 17vh);
+    }
+
+    .table {
+        top: 42vh;
     }
 }
 

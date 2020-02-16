@@ -5,16 +5,16 @@ import FavoriteIcon from '../favorite-icon';
 import Grid from '@material-ui/core/Grid';
 
 const SingleCharacterPageHeader = props => {
-	const {img} = props;
-	const data = {
-		id: '12',
-		name: 'Ricky',
-		status: 'Alive',
-		species: 'Human',
-		type: 'type',
-		gender: 'Man',
-		image: img
-	};
+	const {data} = props;
+	// const data = {
+	// 	id: '12',
+	// 	name: 'Ricky',
+	// 	status: 'Alive',
+	// 	species: 'Human',
+	// 	type: 'type',
+	// 	gender: 'Man',
+	// 	image: img
+	// };
 	return (
 		<div className={Css.main}>
 			<div className={Css.upper}>
@@ -26,10 +26,10 @@ const SingleCharacterPageHeader = props => {
 			<div className={Css.infos}>
 				<div className={Css.infoTexts}>
 					<h3 style={{fontWeight: 'bold', marginBottom: '3px'}}>
-                        {data.name}{' ,'}{data.id}
+						{data.name}{' ,'}{data.id}
 					</h3>
 					<div className={Css.gridDiv}>
-						<Grid style={{width: 200}} container spacing={3}>
+						<Grid style={{width: 400}} container spacing={3}>
 							<Grid item xs={6}>
 								<span>{data.species}</span>
 								<span>{data.status}</span>
@@ -47,7 +47,7 @@ const SingleCharacterPageHeader = props => {
 };
 
 SingleCharacterPageHeader.propTypes = {
-	img: PropTypes.any.isRequired,
+	data: PropTypes.object.isRequired,
 };
 
 export default SingleCharacterPageHeader;

@@ -8,10 +8,10 @@ const getCharacter = id => async dispatch => {
 	try {
 		const res = await readCharacter(`https://rickandmortyapi.com/api/character/${id}`);
 		if (res.data) {
-			const episode = res.data;
+			const character = res.data;
 			dispatch({
 				type: 'GET_CHARACTER',
-				episode
+				character
 			});
 		}
 	} catch (e) {

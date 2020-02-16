@@ -7,7 +7,7 @@ const CharacterReducer = (state = defaultState, action) => {
 	case 'GET_CHARACTER':
 		return {
 			...state,
-			episode: action.episode
+			character: action.character
 		};
 	default:
 		return state;
