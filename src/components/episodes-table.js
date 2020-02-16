@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function EnhancedTable(props) {
+const EpisodesTable = props => {
 	const classes = useStyles();
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('calories');
@@ -174,7 +174,9 @@ export default function EnhancedTable(props) {
 	);
 }
 
-EnhancedTable.propTypes = {
+EpisodesTable.propTypes = {
 	rows: PropTypes.array.isRequired,
 	history: PropTypes.object.isRequired,
 };
+
+export default EpisodesTable;
