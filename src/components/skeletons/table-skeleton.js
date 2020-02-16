@@ -15,7 +15,7 @@ const TableSkeleton = () => {
 		<div className={classes.root}>
 			{[...Array(10).keys()].map(key =>
 				<div key={key}>
-					<Skeleton animation="wave" height={55} />
+					<Skeleton height={55} />
 				</div>)
 			} 
 		</div>
