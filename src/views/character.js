@@ -7,7 +7,6 @@ import SingleCharacterEpisodeTable from '../components/character/single-characte
 import {getCharacter} from '../redux/actions/character.action';
 import Loading from '../components/loading/loading';
 
-import './styles/sheared.css';
 import './styles/character.css';
 
 const Character = (props) => {
@@ -20,7 +19,7 @@ const Character = (props) => {
 	});
 
 	return (
-		<div className={'main'}>
+		<div>
 			{characterReducer.character ? <>
 				<SingleCharacterPageHeader data={characterReducer.character}/>
 				<SingleCharacterEpisodeTable history={history}/>
