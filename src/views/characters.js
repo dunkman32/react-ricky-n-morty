@@ -10,6 +10,8 @@ import CharactersTable from '../components/characters-table';
 import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
 
+import './characters.css';
+
 const Characters = props => {
 	const {charactersReducer} = props;
 	const color = randomColor({luminosity: 'dark'});
