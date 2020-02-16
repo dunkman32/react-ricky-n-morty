@@ -18,7 +18,7 @@ const SingleCharacterEpisodeTable = props => {
 	useEffect(() => {
 		console.log(takeEpisodesId(character.episode), '123');
 		getEpisodesById(takeEpisodesId(character.episode));
-	});
+	}, []);
 
 	const returnEpisodesArray = episodes => (episodes instanceof Array) ? episodes : [episodes];
 

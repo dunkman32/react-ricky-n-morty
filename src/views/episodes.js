@@ -22,7 +22,7 @@ const Episodes = props => {
 
 	useEffect(() => {
 		props.getEpisodes();
-	});
+	}, []);
 
 	return (
 		<div className='main'>

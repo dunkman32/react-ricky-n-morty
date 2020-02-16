@@ -20,7 +20,7 @@ const Characters = props => {
 
 	useEffect(() => {
 		getCharacters();
-	});
+	}, []);
 
 	return (
 		<div className={'main'}>

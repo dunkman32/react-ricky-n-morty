@@ -13,7 +13,7 @@ const SingleEpisodeCharactersList = (props) => {
 
 	useEffect(() => {
 		props.getCharactersById(takeCharactersId(episode.characters));
-	});
+	}, []);
 
 	return episode && <div>
 		<div style={{width: '100% !important'}}>{characters && characters.map(character => <SingleCharacter

@@ -22,7 +22,7 @@ const IntegrationFbComments = () => {
 
 	useEffect(() => {
 		if (window.FB) window.FB.XFBML.parse();
-	});
+	}, []);
 
 	return (
 		<div>
