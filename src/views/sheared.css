@@ -1,0 +1,29 @@
+.main {
+    background-image: url('../static/pattern.svg');
+    min-height: 100vh;
+}
+
+.paper {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+@media screen and (max-width: 800px) {
+    .paper {
+        width: 88%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .paper {
+        width: 92%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .paper {
+        width: 98%;
+    }
+}
