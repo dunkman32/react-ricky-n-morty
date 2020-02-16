@@ -11,8 +11,8 @@ import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
 import TableSkeleton from '../components/skeletons/table-skeleton';
 
-import './characters.css';
-import './sheared.css';
+import './styles/characters.css';
+import './styles/sheared.css';
 
 const Characters = props => {
 	const {charactersReducer, history, getCharacters} = props;

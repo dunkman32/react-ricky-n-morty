@@ -6,6 +6,7 @@ import Episode from './views/episode';
 import Notifications from './components/notifications';
 import PageNotFound from './views/page-not-found';
 import Characters from './views/characters';
+import Character from './views/character';
 
 import './App.css';
 
@@ -15,7 +16,8 @@ const App = () => {
 			<Switch>
 				<Route exact path="/" component={Episodes}/>
 				<Route path="/episode/:id" component={Episode}/>
-				<Route path="/characters" component={Characters}/>
+				<Route exact path="/characters" component={Characters}/>
+				<Route path="/character/:id" component={Character}/>
 				<Route component={PageNotFound}/>
 			</Switch>
 			<Notifications/>
