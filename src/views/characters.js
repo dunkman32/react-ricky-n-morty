@@ -9,8 +9,10 @@ import {getCharacters} from '../redux/actions/characters.action';
 import CharactersTable from '../components/characters-table';
 import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
+import TableSkeleton from '../components/skeletons/table-skeleton';
 
 import './characters.css';
+import './sheared.css';
 
 const Characters = props => {
 	const {charactersReducer, history, getCharacters} = props;
@@ -21,18 +23,21 @@ const Characters = props => {
 	}, []);
 
 	return (
-		<div className={'characters-bg'}>
-			<>
-				{charactersReducer.results ?
-					<Paper style={{
-						width: '80%',
-						margin: '0 auto'
-					}}>
-						<CharactersTable info={charactersReducer.info} rows={charactersReducer.results} history={history}/>
-					</Paper>
-					: <Loading/>}
-			</>
-			<Footer color={'black'} hurtColor={color} fixed={false}/>
+		<div className={'main'}>
+			<div style={{height: 75}}>
+				<div className="background"></div>
+			</div>
+			
+			{charactersReducer.results ?
+				<Paper className={'paper'}>
+					<CharactersTable info={charactersReducer.info} rows={charactersReducer.results} history={history}/>
+				</Paper>
+				: <>
+					<TableSkeleton/>
+					<Loading/>
+				</>}
+
+			<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.results}/>
 		</div>
 	);
 };

@@ -6,6 +6,7 @@ import {makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import randomColor from 'randomcolor';
 import Footer from '../components/footer';
+import pattern from '../static/pattern.svg';
 
 const useStyles = makeStyles({
 	imageForBrowser: {
@@ -20,7 +21,8 @@ const useStyles = makeStyles({
 		bottom: 0,
 		right: 0,
 		top: 0,
-		backgroundColor: '#f5f5f5'
+		backgroundColor: '#f5f5f5',
+		backgroundImage: `url(${pattern})`,
 	},
 	link: {
 		textDecoration: 'none',
@@ -34,14 +36,13 @@ const useStyles = makeStyles({
 	textDescription: {
 		fontStyle: 'italic'
 	},
-	but: {}
 });
 const PageNotFound = () => {
 	const color = randomColor({luminosity: 'dark'});
 	const classes = useStyles();
-	return <div>
+	return <>
 		{isMobile ?
-			<>
+			<div className={classes.bodyForBrowser}>
 				<h1 className={classes.text404Browser} style={{color}}>404</h1>
 				<h3 className={classes.textDescription} style={{color}}>We are sorry, Page Not Found...</h3>
 				<Link className={classes.link} to={'/'}>
@@ -54,7 +55,7 @@ const PageNotFound = () => {
 				<div style={{color, fontWeight: 'bold'}}>
 					<Footer color={'white'} hurtColor={color} fixed/>
 				</div>
-			</> : <div className={classes.bodyForBrowser}>
+			</div> : <div className={classes.bodyForBrowser}>
 				<h1 className={classes.text404Browser} style={{color}}>404</h1>
 				<h3 className={classes.textDescription} style={{color}}>We are sorry, Page Not Found...</h3>
 				<Link className={classes.link} to={'/'}>
@@ -64,10 +65,10 @@ const PageNotFound = () => {
 					}}>Return Back</Button>
 				</Link>
 				<img className={classes.imageForBrowser} src={travolta} alt={'travolta'}/>
-				<Footer color={'white'} hurtColor={color} fixed/>
+				<Footer color={'black'} hurtColor={color} fixed/>
 			</div>
 		}
-	</div>;
+	</>;
 };
 
 export default PageNotFound;

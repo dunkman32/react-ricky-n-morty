@@ -3,37 +3,46 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import {Paper} from '@material-ui/core';
+import {isMobile} from 'react-device-detect';
 //methods
 import {getEpisodes} from '../redux/actions/episodes.action';
 //components
 import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
-import EpisodesTable from '../components/episodes-table';
+import EpisodesTable from '../components/episodes/episodes-table';
+import TableSkeleton from '../components/skeletons/table-skeleton';
 //css
 import './episodes.css';
+import './sheared.css';
+import EpisodesTableForMobile from '../components/episodes/episodes-table-for-mobile';
 
 const Episodes = props => {
 	const {history, episodesReducer} = props;
-	const color = randomColor({ luminosity: 'dark' });
+	const color = randomColor({luminosity: 'dark'});
 
 	useEffect(() => {
 		props.getEpisodes();
 	}, []);
 
 	return (
-		<div className='background'>
-			<div style={{height: 50}}></div>
+		<div className='main'>
+			<div style={{height: 75}}>
+				<div className="background"></div>
+			</div>
 			<>
 				{episodesReducer.results ?
-					<Paper style={{
-						width: '80%',
-						margin: '0 auto'
-					}}>
-						<EpisodesTable rows={episodesReducer.results} history={history}/>
+					<Paper className={'paper'}>
+						{
+							!isMobile ? <EpisodesTable rows={episodesReducer.results} history={history}/> :
+								<EpisodesTableForMobile rows={episodesReducer.results} history={history}/>
+						}
 					</Paper>
-					: <Loading/>}
+					: <>
+						<TableSkeleton/>
+						<Loading/>
+					</>}
 			</>
-			<Footer color={'white'} hurtColor={color} fixed={false}/>
+			<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.results}/>
 		</div>
 	);
 };

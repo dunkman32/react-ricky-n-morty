@@ -125,7 +125,6 @@ const CharactersTable = props => {
 											</TableCell>
 											<TableCell onClick={(e) => {
 												e.preventDefault();
-												console.log('sasassa');
 												setOpenImageDialog(true);
 												setImage(row.image);
 											}}>

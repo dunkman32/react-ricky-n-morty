@@ -7,8 +7,10 @@ import PropTypes from 'prop-types';
 import Loading from '../components/loading/loading';
 import SingleEpisodeCharactersList from '../components/single-episode-characters-list';
 import './episode.css';
+import './sheared.css';
 import Divider from '@material-ui/core/Divider';
 import IntegrationFbComments from '../components/integration-fb-comments';
+import SingleEpisodeSkeleton from '../components/skeletons/single-episode-skeleton';
 
 const Episode = (props) => {
 	const {episodeReducer, match} = props;
@@ -19,14 +21,16 @@ const Episode = (props) => {
 	}, [id]);
 
 	return (
-		<div className='background-episode'>
+		<div className='main'>
 			{episodeReducer.episode ?
-				<Paper style={{width: '80%', margin: '0 auto', position: 'relative'}}>
+				<Paper className={'paper'}>
 					<SingleEpisodeKeysList id={parseInt(id)}/>
 					<Divider/>
 					<SingleEpisodeCharactersList/>
-				</Paper> :
-				<Loading/>}
+				</Paper> : <>
+					<SingleEpisodeSkeleton/>
+					<Loading/>
+				</>}
 			<IntegrationFbComments/>
 		</div>
 	);
