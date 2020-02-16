@@ -12,11 +12,9 @@ const SingleCharacterEpisodeTable = props => {
 	const {history, getEpisodesById, episodesReducer, characterReducer} = props;
 	const {episodes} = episodesReducer;
 	const {character} = characterReducer;
-	console.log(props);
 	const takeEpisodesId = (episodes) => episodes.map(episode => episode.split('episode/')[1]);
 
 	useEffect(() => {
-		console.log(takeEpisodesId(character.episode), '123');
 		getEpisodesById(takeEpisodesId(character.episode));
 	}, []);
 

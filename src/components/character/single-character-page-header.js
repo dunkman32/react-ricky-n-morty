@@ -10,7 +10,7 @@ const SingleCharacterPageHeader = props => {
 		<div className={Css.main}>
 			<div className={Css.upper}>
 				<div className={Css.favoriteIcon}>
-					<FavoriteIcon id={data.id}/>
+					<FavoriteIcon id={`characters-${data.id}`}/>
 				</div>
 				<img src={data.image} className={Css.image} alt="character"/>
 			</div>
