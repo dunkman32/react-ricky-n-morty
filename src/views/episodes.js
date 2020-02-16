@@ -12,8 +12,8 @@ import Footer from '../components/footer';
 import EpisodesTable from '../components/episodes/episodes-table';
 import TableSkeleton from '../components/skeletons/table-skeleton';
 //css
-import './episodes.css';
-import './sheared.css';
+import './styles/episodes.css';
+import './styles/sheared.css';
 import EpisodesTableForMobile from '../components/episodes/episodes-table-for-mobile';
 
 const Episodes = props => {

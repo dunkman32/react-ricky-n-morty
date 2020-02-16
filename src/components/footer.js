@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 import { Favorite } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core';
-import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
 	root: {

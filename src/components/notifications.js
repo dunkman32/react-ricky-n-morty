@@ -28,6 +28,8 @@ const Notifications = (props) =>{
 			case NOTIFICATION_ERROR:
 				NotificationManager.error('Error', message, 1500, callBack);
 				break;
+			default: NotificationManager.error('Error', message, 1500, callBack);
+				break;
 			}
 		}
 	});

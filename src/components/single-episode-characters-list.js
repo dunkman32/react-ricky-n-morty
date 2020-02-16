@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+
 import SingleCharacter from './single-character';
 import {getCharactersById} from '../redux/actions/characters.action';
 
@@ -12,7 +13,7 @@ const SingleEpisodeCharactersList = (props) => {
 
 	useEffect(() => {
 		props.getCharactersById(takeCharactersId(episode.characters));
-	}, [episode.characters]);
+	}, []);
 
 	return episode && <div>
 		<div style={{width: '100% !important'}}>{characters && characters.map(character => <SingleCharacter

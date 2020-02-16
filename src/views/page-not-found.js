@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import randomColor from 'randomcolor';
 import {isMobile} from 'react-device-detect';
-import travolta from '../static/travolta.gif';
 import {makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import randomColor from 'randomcolor';
+
 import Footer from '../components/footer';
 import pattern from '../static/pattern.svg';
+import travolta from '../static/travolta.gif';
 
 const useStyles = makeStyles({
 	imageForBrowser: {
