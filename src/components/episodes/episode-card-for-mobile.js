@@ -2,11 +2,13 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import {Link} from '@material-ui/icons';
 
 import FavoriteIcon from '../favorite-icon';
 
 const EpisodeCardForMobile = (props) => {
-	const {id, name, air_date, episode} = props.row;
+	const {id, name, air_date, episode, setClicked, clicked} = props.row;
 
 	const handleClick = (event, id) => {
 		event.preventDefault();
@@ -14,7 +16,7 @@ const EpisodeCardForMobile = (props) => {
 	};
 
 	return (
-		<Paper onClick={e => handleClick(e, id)}>
+		<Paper>
 			<Grid container spacing={3}>
 				<Grid item xs={7}>
 					<p>id{' - '}{id}</p>
@@ -23,7 +25,10 @@ const EpisodeCardForMobile = (props) => {
 				</Grid>
 				<Grid item xs={4}>
 					<p>name{' - '}{name}</p>
-					<FavoriteIcon style={{zIndex: 1000}} id={`episodes-${id}`}/>
+					<IconButton onClick={e => handleClick(e, id)}>
+						<Link/>
+					</IconButton>
+					<FavoriteIcon setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`episodes-${id}`}/>
 				</Grid>
 			</Grid>
 		</Paper>
@@ -34,6 +39,8 @@ const EpisodeCardForMobile = (props) => {
 EpisodeCardForMobile.propTypes = {
 	row: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool
 };
 
 export default EpisodeCardForMobile;

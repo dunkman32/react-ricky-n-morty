@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Paper} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {isMobile} from 'react-device-detect';
@@ -38,7 +37,7 @@ const Favorites = props => {
 			<><div className={'paper'}>
 				{!isMobile? <CharactersTable setClicked={setClicked} clicked={clicked} rows={charactersReducer.characters}
 					history={history}/>:
-					<CharactersTableForMobile rows={charactersReducer.characters} history={history}/>
+					<CharactersTableForMobile setClicked={setClicked} clicked={clicked} rows={charactersReducer.characters} history={history}/>
 				}
 			</div>
 			<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.characters}/>
@@ -49,8 +48,8 @@ const Favorites = props => {
 			</> : episodesReducer.episodes ?
 			<><div className={'paper'}>
 				{
-					!isMobile ? <EpisodesTable rows={episodesReducer.episodes} history={history}/> :
-						<EpisodesTableForMobile rows={episodesReducer.episodes} history={history}/>
+					!isMobile ? <EpisodesTable setClicked={setClicked} clicked={clicked} rows={episodesReducer.episodes} history={history}/> :
+						<EpisodesTableForMobile setClicked={setClicked} clicked={clicked} rows={episodesReducer.episodes} history={history}/>
 				}
 			</div>
 			<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.episodes}/>

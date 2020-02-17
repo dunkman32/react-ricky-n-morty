@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {isMobile} from 'react-device-detect';
 
 import EpisodesTable from '../episodes/episodes-table';
-import Loading from '../loading/loading';
 import {getEpisodesById} from '../../redux/actions/episodes.action';
+import EpisodesTableForMobile from '../episodes/episodes-table-for-mobile';
 
 import Css from './cheared.module.css';
 
@@ -22,7 +23,9 @@ const SingleCharacterEpisodeTable = props => {
 
 	return (
 		<div className={Css.table}>
-			{episodes ? <EpisodesTable history={history} rows={returnEpisodesArray(episodes)}/> : <Loading/>}
+			{episodes && (!isMobile? <EpisodesTable history={history} rows={returnEpisodesArray(episodes)}/>:
+				<EpisodesTableForMobile history={history} rows={returnEpisodesArray(episodes)}/>
+			)}
 		</div>
 	);
 };

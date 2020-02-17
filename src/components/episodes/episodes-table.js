@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 const EpisodesTable = props => {
 	const classes = useStyles();
-	const {rows} = props;
+	const {rows, setClicked, clicked} = props;
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
@@ -122,7 +122,7 @@ const EpisodesTable = props => {
 												{row.episode}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon style={{zIndex: 1000}} id={`episodes-${row.id}`}/>
+												<FavoriteIcon clicked={clicked} setClicked={setClicked} style={{zIndex: 1000}} id={`episodes-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);
@@ -152,6 +152,8 @@ const EpisodesTable = props => {
 EpisodesTable.propTypes = {
 	rows: PropTypes.array.isRequired,
 	history: PropTypes.object.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool
 };
 
 export default EpisodesTable;

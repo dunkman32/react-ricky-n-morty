@@ -1,7 +1,9 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import {Link} from '@material-ui/icons';
 import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
 
 import FavoriteIcon from '../favorite-icon';
 
@@ -16,7 +18,7 @@ const CharacterCardForMobile = (props) => {
 	};
 
 	return (
-		<Paper className={Css.card} onClick={e => handleClick(e, id)}>
+		<Paper className={Css.card}>
 			<Grid container spacing={3}>
 				<Grid item xs={12}  className={Css.outerGrid}>
 					<div className={Css.imageGrid}>
@@ -30,6 +32,9 @@ const CharacterCardForMobile = (props) => {
 				</Grid>
 				<Grid item xs={6}>
 					<p>name{' - '}{name}</p>
+					<IconButton onClick={e => handleClick(e, id)}>
+						<Link/>
+					</IconButton>
 					<FavoriteIcon style={{zIndex: 1000}} id={`characters-${id}`}/>
 				</Grid>
 			</Grid>
@@ -41,6 +46,8 @@ const CharacterCardForMobile = (props) => {
 CharacterCardForMobile.propTypes = {
 	row: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool
 };
 
 export default CharacterCardForMobile;

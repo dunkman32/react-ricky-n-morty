@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import EpisodeCardForMobile from './episode-card-for-mobile';
 
 const EpisodesTableForMobile = props => {
-	const {rows, history} = props;
+	const {rows, history, setClicked, clicked} = props;
 	return (
 		<div>
 			{
 				rows && rows.map(row => <div key={row.id}>
-					<EpisodeCardForMobile history={history} row={row}/>
+					<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history} row={row}/>
 				</div>)
 			}
 		</div>
@@ -19,6 +19,8 @@ const EpisodesTableForMobile = props => {
 EpisodesTableForMobile.propTypes = {
 	rows: PropTypes.array.isRequired,
 	history: PropTypes.object.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool
 };
 
 export default EpisodesTableForMobile;
