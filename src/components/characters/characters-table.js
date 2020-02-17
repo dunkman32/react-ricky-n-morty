@@ -9,10 +9,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import {makeStyles} from '@material-ui/core/styles';
 
-import FavoriteIcon from './favorite-icon';
-import EnhancedTableHead from './table-head';
-import {getComparator, stableSort} from '../utils/table-utils';
-import CharactersImageDialog from './characters-image-dialog';
+import FavoriteIcon from '../favorite-icon';
+import EnhancedTableHead from '../table-head';
+import {getComparator, stableSort} from '../../utils/table-utils';
+import CharactersImageDialog from '../characters-image-dialog';
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
@@ -59,7 +59,7 @@ const CharactersTable = props => {
 	const [image, setImage] = React.useState(null);
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length || 10);
+	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length && rows.length < 10? rows.length: 10);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
