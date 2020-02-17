@@ -122,7 +122,7 @@ const EpisodesTable = props => {
 												{row.episode}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon style={{zIndex: 1000}} id={row.id}/>
+												<FavoriteIcon style={{zIndex: 1000}} id={`episodes-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);

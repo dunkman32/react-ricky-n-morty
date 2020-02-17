@@ -5,6 +5,7 @@ import NotificationHandler, {
 } from './notification.action';
 
 const getCharactersById = ids => async dispatch => {
+	console.log(ids)
 	try {
 		const response = await readCharactersById(`https://rickandmortyapi.com/api/character/${ids.join(',')}`);
 		if (response.data) {

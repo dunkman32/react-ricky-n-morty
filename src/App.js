@@ -7,7 +7,7 @@ import Notifications from './components/notifications';
 import PageNotFound from './views/page-not-found';
 import Characters from './views/characters';
 import Character from './views/character';
-
+import FavoriteCharacters from './views/favorite-characters';
 import './App.css';
 
 const App = () => {
@@ -18,6 +18,7 @@ const App = () => {
 				<Route path="/episode/:id" component={Episode}/>
 				<Route exact path="/characters" component={Characters}/>
 				<Route path="/character/:id" component={Character}/>
+				<Route path="/favorite-characters" component={FavoriteCharacters}/>
 				<Route component={PageNotFound}/>
 			</Switch>
 			<Notifications/>
