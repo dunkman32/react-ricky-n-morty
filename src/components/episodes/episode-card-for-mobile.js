@@ -16,7 +16,7 @@ const EpisodeCardForMobile = (props) => {
 	};
 
 	return (
-		<Paper>
+		<Paper style={{marginBottom: 20}}>
 			<Grid container spacing={3}>
 				<Grid item xs={7}>
 					<p>id{' - '}{id}</p>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -12,6 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import {getComparator, stableSort} from '../../utils/table-utils';
 import EnhancedTableHead from '../table-head';
 import FavoriteIcon from '../favorite-icon';
+import {getEpisodes} from '../../redux/actions/episodes.action';
+import {connect} from 'react-redux';
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
@@ -47,12 +49,15 @@ const useStyles = makeStyles(theme => ({
 
 const EpisodesTable = props => {
 	const classes = useStyles();
-	const {rows, setClicked, clicked} = props;
+	const {rows, setClicked, clicked, episodesReducer, main, getEpisodes} = props;
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length && rows.length < 10? rows.length: 10);
+	const data = main ? episodesReducer.results : rows;
 
+	useEffect(() => {
+		if(main) getEpisodes(page + 1);
+	}, [page]);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -69,15 +74,9 @@ const EpisodesTable = props => {
 		setPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = event => {
-		setRowsPerPage(parseInt(event.target.value, 10));
-		setPage(0);
-	};
-
-	const emptyRows = rows ? rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage) : 20;
 	return (
 		<div className={classes.root}>
-			{rows && <Paper className={classes.paper}>
+			{data && <Paper className={classes.paper}>
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -91,11 +90,10 @@ const EpisodesTable = props => {
 							order={order}
 							orderBy={orderBy}
 							onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							rowCount={data.length}
 						/>
 						<TableBody>
-							{stableSort(rows, getComparator(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+							{stableSort(data, getComparator(order, orderBy))
 								.map((row) => {
 									return (
 										<TableRow
@@ -116,10 +114,10 @@ const EpisodesTable = props => {
 												{row.name}
 											</TableCell>
 											<TableCell onClick={event => handleClick(event, row.id)}>
-												{row.air_date}
+												{row.episode}
 											</TableCell>
 											<TableCell onClick={event => handleClick(event, row.id)}>
-												{row.episode}
+												{row.air_date}
 											</TableCell>
 											<TableCell>
 												<FavoriteIcon clicked={clicked} setClicked={setClicked} style={{zIndex: 1000}} id={`episodes-${row.id}`}/>
@@ -127,33 +125,40 @@ const EpisodesTable = props => {
 										</TableRow>
 									);
 								})}
-							{emptyRows > 0 && (
-								<TableRow style={{height: 53 * emptyRows}}>
-									<TableCell colSpan={6}/>
-								</TableRow>
-							)}
 						</TableBody>
 					</Table>
 				</TableContainer>
-				<TablePagination
-					rowsPerPageOptions={[5, 10, 25]}
+				{(main && episodesReducer.info) && <TablePagination
+					rowsPerPageOptions={[20]}
 					component="div"
-					count={rows.length}
-					rowsPerPage={rowsPerPage}
+					count={episodesReducer.info.count}
+					rowsPerPage={data.length}
 					page={page}
 					onChangePage={handleChangePage}
-					onChangeRowsPerPage={handleChangeRowsPerPage}
-				/>
+				/>}
 			</Paper>}
 		</div>
 	);
 };
 
 EpisodesTable.propTypes = {
-	rows: PropTypes.array.isRequired,
+	rows: PropTypes.array,
 	history: PropTypes.object.isRequired,
 	setClicked: PropTypes.func,
-	clicked: PropTypes.bool
+	clicked: PropTypes.bool,
+	getEpisodes: PropTypes.func.isRequired,
+	episodesReducer: PropTypes.object.isRequired,
+	main: PropTypes.bool
 };
 
-export default EpisodesTable;
+const mapStateToProps = state => ({
+	episodesReducer: state.episodesReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+	getEpisodes: page => {
+		dispatch(getEpisodes(page));
+	},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodesTable);

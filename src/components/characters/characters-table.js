@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -13,6 +13,8 @@ import FavoriteIcon from '../favorite-icon';
 import EnhancedTableHead from '../table-head';
 import {getComparator, stableSort} from '../../utils/table-utils';
 import CharactersImageDialog from '../characters-image-dialog';
+import {getCharacters} from '../../redux/actions/characters.action';
+import {connect} from 'react-redux';
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
@@ -52,14 +54,14 @@ const useStyles = makeStyles(theme => ({
 }));
 const CharactersTable = props => {
 	const classes = useStyles();
-	const {rows, setClicked, clicked} = props;
+	const {rows, setClicked, clicked, main, charactersReducer, getCharacters} = props;
 
 	const [openImageDialog, setOpenImageDialog] = React.useState(false);
 	const [order, setOrder] = React.useState('asc');
 	const [image, setImage] = React.useState(null);
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length && rows.length < 10? rows.length: 10);
+	const data = main ? charactersReducer.results : rows;
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -76,16 +78,13 @@ const CharactersTable = props => {
 		setPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = event => {
-		setRowsPerPage(parseInt(event.target.value, 10));
-		setPage(0);
-	};
-
-	const emptyRows = rows ? rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage) : 20;
+	useEffect(() => {
+		if (main) getCharacters(page + 1);
+	}, [page]);
 
 	return (
 		<div className={classes.root}>
-			{rows && <Paper className={classes.paper}>
+			{data && <Paper className={classes.paper}>
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -99,11 +98,10 @@ const CharactersTable = props => {
 							order={order}
 							orderBy={orderBy}
 							onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							rowCount={data.length}
 						/>
 						<TableBody>
-							{stableSort(rows, getComparator(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+							{stableSort(data, getComparator(order, orderBy))
 								.map((row) => {
 									return (
 										<TableRow
@@ -140,28 +138,23 @@ const CharactersTable = props => {
 												{row.gender}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon  setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`characters-${row.id}`}/>
+												<FavoriteIcon setClicked={setClicked} clicked={clicked}
+													style={{zIndex: 1000}} id={`characters-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);
 								})}
-							{emptyRows > 0 && (
-								<TableRow style={{height: 53 * emptyRows}}>
-									<TableCell colSpan={6}/>
-								</TableRow>
-							)}
 						</TableBody>
 					</Table>
 				</TableContainer>
-				<TablePagination
-					rowsPerPageOptions={[5, 10, 25]}
+				{(main && charactersReducer.info) && <TablePagination
+					rowsPerPageOptions={[20]}
 					component="div"
-					count={rows.length}
-					rowsPerPage={rowsPerPage}
+					count={charactersReducer.info.count}
+					rowsPerPage={data.length}
 					page={page}
 					onChangePage={handleChangePage}
-					onChangeRowsPerPage={handleChangeRowsPerPage}
-				/>
+				/>}
 			</Paper>}
 			<CharactersImageDialog open={openImageDialog}
 				setOpen={setOpenImageDialog}
@@ -172,10 +165,23 @@ const CharactersTable = props => {
 
 CharactersTable.propTypes = {
 	info: PropTypes.object,
-	rows: PropTypes.array.isRequired,
+	rows: PropTypes.array,
+	main: PropTypes.bool,
 	history: PropTypes.object.isRequired,
 	setClicked: PropTypes.func,
-	clicked: PropTypes.bool
+	clicked: PropTypes.bool,
+	getCharacters: PropTypes.func.isRequired,
+	charactersReducer: PropTypes.object.isRequired
 };
 
-export default CharactersTable;
+const mapStateToProps = state => ({
+	charactersReducer: state.charactersReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+	getCharacters: page => {
+		dispatch(getCharacters(page));
+	},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharactersTable);

@@ -1,21 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 import EpisodeCardForMobile from './episode-card-for-mobile';
-import ShowMoreButton from '../show-more-button';
+import {getEpisodes} from '../../redux/actions/episodes.action';
+
 
 const EpisodesTableForMobile = props => {
-	const {rows, history, setClicked, clicked} = props;
-	const [quantity, setQuantity] = useState(rows.length && rows.length < 10? rows.length: 10);
+	const {rows, history, setClicked, clicked, episodesReducer, main, getEpisodes} = props;
+	const [page, setPage] = React.useState(0);
+	const data = main ? episodesReducer.results : rows;
+	useEffect(() => {
+		if (main) getEpisodes(page + 1);
+	}, [page]);
+
 	return (
 		<div>
 			{
-				rows && <>{rows
-					.slice(0, quantity)
-					.map(row => <div key={row.id}>
-						<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history} row={row}/>
-					</div>)}
-				<ShowMoreButton rows={rows} quantity={quantity} setQuantity={setQuantity}/>
+				data && <>
+					{
+						data.map(row => <div key={row.id}>
+							<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history}
+								row={row}/>
+						</div>)
+					}
+					{
+						(main && episodesReducer.info) && <>{
+							page !== 0 &&
+                            <Button onClick={() => setPage(page - 1)}>prev</Button>
+						}{' '}{
+							episodesReducer.info.pages !== page + 1  &&
+                            <Button onClick={() => setPage(page + 1)}>next</Button>
+						}</>
+					}
 				</>
 			}
 		</div>
@@ -26,7 +44,20 @@ EpisodesTableForMobile.propTypes = {
 	rows: PropTypes.array.isRequired,
 	history: PropTypes.object.isRequired,
 	setClicked: PropTypes.func,
-	clicked: PropTypes.bool
+	clicked: PropTypes.bool,
+	getEpisodes: PropTypes.func.isRequired,
+	episodesReducer: PropTypes.object.isRequired,
+	main: PropTypes.bool
 };
 
-export default EpisodesTableForMobile;
+const mapStateToProps = state => ({
+	episodesReducer: state.episodesReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+	getEpisodes: page => {
+		dispatch(getEpisodes(page));
+	},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EpisodesTableForMobile);
