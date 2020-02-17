@@ -27,14 +27,13 @@ const Characters = props => {
 	return (
 		<div className={'main'}>
 			<div style={{height: 75}}>
-				<div className="background"></div>
+				<div className="background"/>
 			</div>
 			
 			{charactersReducer.results ?
 				<div className={'paper'}>
 					{!isMobile ?
-						<CharactersTable info={charactersReducer.info} rows={charactersReducer.results}
-										 history={history}/> :
+						<CharactersTable info={charactersReducer.info} rows={charactersReducer.results} history={history}/> :
 						<CharactersTableForMobile rows={charactersReducer.results} history={history}/>
 					}
 				</div>

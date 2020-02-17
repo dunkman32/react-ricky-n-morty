@@ -27,7 +27,7 @@ const Episodes = props => {
 	return (
 		<div className='main'>
 			<div style={{height: 75}}>
-				<div className="background"></div>
+				<div className="background"/>
 			</div>
 			<>
 				{episodesReducer.results ?
