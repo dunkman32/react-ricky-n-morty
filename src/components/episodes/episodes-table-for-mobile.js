@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import EpisodeCardForMobile from './episode-card-for-mobile';
 import {getEpisodes} from '../../redux/actions/episodes.action';
+import FilterTable from '../filter';
 
 
 const EpisodesTableForMobile = props => {
@@ -12,13 +13,14 @@ const EpisodesTableForMobile = props => {
 	const [page, setPage] = React.useState(0);
 	const data = main ? episodesReducer.results : rows;
 	useEffect(() => {
-		if (main) getEpisodes(page + 1);
+		if (main) getEpisodes({page: page + 1});
 	}, [page]);
 
 	return (
 		<div>
 			{
 				data && <>
+					<FilterTable isEpisode/>
 					{
 						data.map(row => <div key={row.id}>
 							<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history}
@@ -41,7 +43,7 @@ const EpisodesTableForMobile = props => {
 };
 
 EpisodesTableForMobile.propTypes = {
-	rows: PropTypes.array.isRequired,
+	rows: PropTypes.array,
 	history: PropTypes.object.isRequired,
 	setClicked: PropTypes.func,
 	clicked: PropTypes.bool,
@@ -55,8 +57,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	getEpisodes: page => {
-		dispatch(getEpisodes(page));
+	getEpisodes: params => {
+		dispatch(getEpisodes(params));
 	},
 });
 

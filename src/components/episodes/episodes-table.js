@@ -14,6 +14,7 @@ import EnhancedTableHead from '../table-head';
 import FavoriteIcon from '../favorite-icon';
 import {getEpisodes} from '../../redux/actions/episodes.action';
 import {connect} from 'react-redux';
+import FilterTable from '../filter';
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
@@ -56,7 +57,7 @@ const EpisodesTable = props => {
 	const data = main ? episodesReducer.results : rows;
 
 	useEffect(() => {
-		if(main) getEpisodes(page + 1);
+		if(main) getEpisodes({page: (page + 1)});
 	}, [page]);
 
 	const handleRequestSort = (event, property) => {
@@ -77,6 +78,7 @@ const EpisodesTable = props => {
 	return (
 		<div className={classes.root}>
 			{data && <Paper className={classes.paper}>
+				<FilterTable isEpisode/>
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -156,8 +158,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	getEpisodes: page => {
-		dispatch(getEpisodes(page));
+	getEpisodes: params => {
+		dispatch(getEpisodes(params));
 	},
 });
 

@@ -15,6 +15,9 @@ import {getComparator, stableSort} from '../../utils/table-utils';
 import CharactersImageDialog from '../characters-image-dialog';
 import {getCharacters} from '../../redux/actions/characters.action';
 import {connect} from 'react-redux';
+import IconButton from '@material-ui/core/IconButton';
+import {FilterList} from '@material-ui/icons';
+import FilterTable from '../filter';
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
@@ -79,12 +82,13 @@ const CharactersTable = props => {
 	};
 
 	useEffect(() => {
-		if (main) getCharacters(page + 1);
+		if (main) getCharacters({page: page + 1});
 	}, [page]);
 
 	return (
 		<div className={classes.root}>
 			{data && <Paper className={classes.paper}>
+				<FilterTable/>
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -179,8 +183,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	getCharacters: page => {
-		dispatch(getCharacters(page));
+	getCharacters: params => {
+		dispatch(getCharacters(params));
 	},
 });
 
