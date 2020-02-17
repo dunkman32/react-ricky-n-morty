@@ -21,7 +21,7 @@ const EnhancedTableHead = props => {
 						padding={headCell.disablePadding ? 'none' : 'default'}
 						sortDirection={orderBy === headCell.id ? order : false}
 					>
-						{!['actions', 'id'].includes(headCell.id) ? <TableSortLabel
+						{!['actions', 'id', 'image', 'gender'].includes(headCell.id) ? <TableSortLabel
 							active={orderBy === headCell.id}
 							direction={orderBy === headCell.id ? order : 'asc'}
 							onClick={createSortHandler(headCell.id)}
