@@ -5,6 +5,7 @@ import CharacterCardForMobile from './character-card-for-mobile';
 import Button from '@material-ui/core/Button';
 import {getCharacters} from '../../redux/actions/characters.action';
 import {connect} from 'react-redux';
+import FilterTable from "../filter";
 
 const CharactersTableForMobile = props => {
 	const {rows, history, setClicked, clicked, main, charactersReducer, getCharacters} = props;
@@ -12,13 +13,14 @@ const CharactersTableForMobile = props => {
 	const data = main ? charactersReducer.results : rows;
 
 	useEffect(() => {
-		if(main) getCharacters(page + 1);
+		if(main) getCharacters({page: page + 1});
 	}, [page]);
 
 	return (
 		<div>
 			{
 				data && <>
+					<FilterTable/>
 					{
 						data.map(row => <div key={row.id}>
 							<CharacterCardForMobile setClicked={setClicked} clicked={clicked} history={history} row={row}/>
@@ -37,7 +39,7 @@ const CharactersTableForMobile = props => {
 };
 
 CharactersTableForMobile.propTypes = {
-	rows: PropTypes.array.isRequired,
+	rows: PropTypes.array,
 	history: PropTypes.object.isRequired,
 	setClicked: PropTypes.func,
 	clicked: PropTypes.bool,
@@ -52,8 +54,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	getCharacters: page => {
-		dispatch(getCharacters(page));
+	getCharacters: params => {
+		dispatch(getCharacters(params));
 	},
 });
 

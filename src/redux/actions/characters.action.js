@@ -22,10 +22,10 @@ const getCharactersById = ids => async dispatch => {
 };
 
 
-const getCharacters = page => async dispatch => {
+const getCharacters = params => async dispatch => {
 	await dispatch(toggleLoading(true));
 	try {
-		const response = await readCharacters(`https://rickandmortyapi.com/api/character?page=${page}`);
+		const response = await readCharacters('https://rickandmortyapi.com/api/character', params);
 		if (response.data) {
 			const {results, info} = response.data;
 			dispatch({

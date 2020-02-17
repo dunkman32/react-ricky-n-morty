@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const readEpisodes = (url) => axios.get(url);
+const readEpisodes = (url, params) => axios.get(url, {
+	params
+});
 
 export {
 	readEpisodes,
