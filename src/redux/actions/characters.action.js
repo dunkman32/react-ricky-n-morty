@@ -1,10 +1,10 @@
 import {readCharactersById, readCharacters} from '../service/characters.service';
 
-import NotificationHandler, {
-	NOTIFICATION_ERROR,
-} from './notification.action';
+import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
+import toggleLoading from './loading.action';
 
 const getCharactersById = ids => async dispatch => {
+	await dispatch(toggleLoading(true));
 	try {
 		const response = await readCharactersById(`https://rickandmortyapi.com/api/character/${ids.join(',')}`);
 		if (response.data) {
@@ -16,11 +16,14 @@ const getCharactersById = ids => async dispatch => {
 		}
 	} catch (e) {
 		dispatch(NotificationHandler(NOTIFICATION_ERROR, `Server error - ${e.message}`));
+	} finally {
+		dispatch(toggleLoading(false));
 	}
 };
 
 
 const getCharacters = page => async dispatch => {
+	await dispatch(toggleLoading(true));
 	try {
 		const response = await readCharacters(`https://rickandmortyapi.com/api/character?page=${page}`);
 		if (response.data) {
@@ -33,6 +36,8 @@ const getCharacters = page => async dispatch => {
 		}
 	} catch (e) {
 		dispatch(NotificationHandler(NOTIFICATION_ERROR, `Server error - ${e.message}`));
+	} finally {
+		dispatch(toggleLoading(false));
 	}
 };
 

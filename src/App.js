@@ -8,6 +8,7 @@ import PageNotFound from './views/page-not-found';
 import Characters from './views/characters';
 import Character from './views/character';
 import Favorites from './views/favorites';
+import Loading from './components/loading/loading';
 import './App.css';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
 				<Route component={PageNotFound}/>
 			</Switch>
 			<Notifications/>
+			<Loading/>
 		</div>
 	);
 };

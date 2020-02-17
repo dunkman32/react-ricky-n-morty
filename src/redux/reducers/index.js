@@ -5,13 +5,15 @@ import CharacterReducer from './character.reducer';
 import EpisodeReducer from './episode.reducer';
 import EpisodesReducer from './episodes.reducer';
 import NotificationReducer from './notification.reducer';
+import LoadingReducer from './loading.reducer';
 
 const allReducers = combineReducers({
 	charactersReducer: CharactersReducer,
 	characterReducer: CharacterReducer,
 	episodeReducer: EpisodeReducer,
 	episodesReducer: EpisodesReducer,
-	notificationReducer: NotificationReducer
+	notificationReducer: NotificationReducer,
+	loadingReducer: LoadingReducer
 });
 
 export default allReducers;

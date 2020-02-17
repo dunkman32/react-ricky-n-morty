@@ -1,14 +1,15 @@
 import {readEpisodes} from '../service/episodes.service';
 
-import NotificationHandler, {
-	NOTIFICATION_ERROR,
-} from './notification.action';
-import {readCharactersById} from "../service/characters.service";
+import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
+import toggleLoading from './loading.action';
+import {readCharactersById} from '../service/characters.service';
 
 const getEpisodes = page => {
+
 	let url = 'https://rickandmortyapi.com/api/episode';
 	if (page) url = `https://rickandmortyapi.com/api/episode?page=${page}`;
 	return async dispatch => {
+		await dispatch(toggleLoading(true));
 		try {
 			const res = await readEpisodes(url);
 			if (res.data) {
@@ -21,12 +22,15 @@ const getEpisodes = page => {
 			}
 		}catch (e) {
 			dispatch(NotificationHandler(NOTIFICATION_ERROR, `Server error - ${e.message}`));
+		}finally {
+			dispatch(toggleLoading(false));
 		}
 	};
 };
 
 
 const getEpisodesById = ids => async dispatch => {
+	await dispatch(toggleLoading(true));
 	try {
 		const response = await readCharactersById(`https://rickandmortyapi.com/api/episode/${ids.join(',')}`);
 		if (response.data) {
@@ -38,6 +42,8 @@ const getEpisodesById = ids => async dispatch => {
 		}
 	} catch (e) {
 		dispatch(NotificationHandler(NOTIFICATION_ERROR, `Server error - ${e.message}`));
+	}finally {
+		dispatch(toggleLoading(false));
 	}
 };
 

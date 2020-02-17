@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {isMobile} from 'react-device-detect';
 import randomColor from 'randomcolor';
-
-import Loading from '../components/loading/loading';
 import CharactersTable from '../components/characters/characters-table';
 import {takeFavoritesId} from '../utils/utils';
 import {getCharactersById} from '../redux/actions/characters.action';
@@ -44,7 +42,6 @@ const Favorites = props => {
 			</>
 			: <>
 				<TableSkeleton/>
-				<Loading/>
 			</> : episodesReducer.episodes ?
 			<><div className={'paper'}>
 				{
@@ -56,7 +53,6 @@ const Favorites = props => {
 			</>
 			: <>
 				<TableSkeleton/>
-				<Loading/>
 			</>
 		}
 	</div>;

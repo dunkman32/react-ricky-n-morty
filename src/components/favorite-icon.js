@@ -53,5 +53,4 @@ FavoriteIcon.propTypes = {
 	clicked: PropTypes.bool,
 };
 
-
 export default FavoriteIcon;
