@@ -51,7 +51,7 @@ const EpisodesTable = props => {
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length || 10);
+	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length && rows.length < 10? rows.length: 10);
 
 
 	const handleRequestSort = (event, property) => {

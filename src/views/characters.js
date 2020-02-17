@@ -7,7 +7,7 @@ import {isMobile} from	'react-device-detect';
 
 import {getCharacters} from '../redux/actions/characters.action';
 
-import CharactersTable from '../components/characters-table';
+import CharactersTable from '../components/characters/characters-table';
 import Loading from '../components/loading/loading';
 import Footer from '../components/footer';
 import TableSkeleton from '../components/skeletons/table-skeleton';

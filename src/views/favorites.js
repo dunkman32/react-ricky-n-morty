@@ -5,7 +5,7 @@ import {isMobile} from 'react-device-detect';
 import randomColor from 'randomcolor';
 
 import Loading from '../components/loading/loading';
-import CharactersTable from '../components/characters-table';
+import CharactersTable from '../components/characters/characters-table';
 import {takeFavoritesId} from '../utils/utils';
 import {getCharactersById} from '../redux/actions/characters.action';
 import TableSkeleton from '../components/skeletons/table-skeleton';
