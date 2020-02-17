@@ -41,6 +41,8 @@ const CharacterCardForMobile = (props) => {
 CharacterCardForMobile.propTypes = {
 	row: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool
 };
 
 export default CharacterCardForMobile;

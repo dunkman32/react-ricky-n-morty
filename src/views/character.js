@@ -10,7 +10,10 @@ import {getCharacter} from '../redux/actions/character.action';
 import Loading from '../components/loading/loading';
 
 import './styles/character.css';
-
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import './styles/episode.css';
+import './styles/sheared.css';
 const Character = (props) => {
 
 	const {history, characterReducer, match, getCharacter} = props;
@@ -21,15 +24,18 @@ const Character = (props) => {
 	}, []);
 
 	return (
-		<div>
+		<div className={'main'}>
 			{characterReducer.character ? <>
 				<SingleCharacterPageHeader data={characterReducer.character}/>
+				<Divider/>
 				<SingleCharacterEpisodeTable history={history}/>
-				<IntegrationFbComments/>
 			</> : <>
 				<SingleCharacterSkeleton/>
 				<Loading/>
 			</>}
+			<div style={{marginTop: '58vh'}}>
+				<IntegrationFbComments/>
+			</div>
 		</div>
 	);
 };
