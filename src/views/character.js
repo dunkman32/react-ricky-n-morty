@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import SingleCharacterPageHeader from '../components/character/single-character-page-header';
 import SingleCharacterEpisodeTable from '../components/character/single-character-episode-table';
+import IntegrationFbComments from '../components/integration-fb-comments';
+import SingleCharacterSkeleton from '../components/skeletons/single-character-skeleton';
 import {getCharacter} from '../redux/actions/character.action';
 import Loading from '../components/loading/loading';
 
@@ -23,7 +25,11 @@ const Character = (props) => {
 			{characterReducer.character ? <>
 				<SingleCharacterPageHeader data={characterReducer.character}/>
 				<SingleCharacterEpisodeTable history={history}/>
-			</>: <Loading/>}
+				<IntegrationFbComments/>
+			</> : <>
+				<SingleCharacterSkeleton/>
+				<Loading/>
+			</>}
 		</div>
 	);
 };
@@ -37,7 +43,6 @@ const mapDispatchToProps = dispatch => ({
 		dispatch(getCharacter(id));
 	},
 });
-
 
 Character.propTypes = {
 	characterReducer: PropTypes.object.isRequired,
