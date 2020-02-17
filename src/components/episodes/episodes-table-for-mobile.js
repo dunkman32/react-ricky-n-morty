@@ -9,7 +9,7 @@ import FilterTable from '../filter';
 
 
 const EpisodesTableForMobile = props => {
-	const {rows, history, setClicked, clicked, episodesReducer, main, getEpisodes} = props;
+	const {rows, history, setClicked, clicked, episodesReducer, main, getEpisodes, showFilterIcon} = props;
 	const [page, setPage] = React.useState(0);
 	const data = main ? episodesReducer.results : rows;
 	useEffect(() => {
@@ -20,7 +20,7 @@ const EpisodesTableForMobile = props => {
 		<div>
 			{
 				data && <>
-					<FilterTable isEpisode/>
+					{showFilterIcon && <FilterTable isEpisode/>}
 					{
 						data.map(row => <div key={row.id}>
 							<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history}
@@ -49,7 +49,8 @@ EpisodesTableForMobile.propTypes = {
 	clicked: PropTypes.bool,
 	getEpisodes: PropTypes.func.isRequired,
 	episodesReducer: PropTypes.object.isRequired,
-	main: PropTypes.bool
+	main: PropTypes.bool,
+	showFilterIcon: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

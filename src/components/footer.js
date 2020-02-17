@@ -31,7 +31,7 @@ const Footer = props => {
 	const color = props.color || '#8e24aa';
 	const hurtColor = props.hurtColor || '#8e24aa';
 	return (
-		<div className={props.fixed ? classes.fixed : classes.footer}>
+		<div className={props.fixed ? classes.fixed : classes.footer} style={{ fontFamily: '\'Lobster\', cursive' }}>
 			<Grid container className={classes.root}>
 				<Grid container xs={12} item justify="center" style={{color}}>
                     &copy; {1900 + new Date().getYear()}, made with{' '}

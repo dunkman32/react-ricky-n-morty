@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import FilterTable from "../filter";
 
 const CharactersTableForMobile = props => {
-	const {rows, history, setClicked, clicked, main, charactersReducer, getCharacters} = props;
+	const {rows, history, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
 	const [page, setPage] = React.useState(0);
 	const data = main ? charactersReducer.results : rows;
 
@@ -20,7 +20,7 @@ const CharactersTableForMobile = props => {
 		<div>
 			{
 				data && <>
-					<FilterTable/>
+				{showFilterIcon && <FilterTable/>}
 					{
 						data.map(row => <div key={row.id}>
 							<CharacterCardForMobile setClicked={setClicked} clicked={clicked} history={history} row={row}/>
@@ -46,7 +46,7 @@ CharactersTableForMobile.propTypes = {
 	getCharacters: PropTypes.func.isRequired,
 	charactersReducer: PropTypes.object.isRequired,
 	main: PropTypes.bool,
-
+	showFilterIcon: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

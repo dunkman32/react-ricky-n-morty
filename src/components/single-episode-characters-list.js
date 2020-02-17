@@ -17,11 +17,12 @@ const SingleEpisodeCharactersList = (props) => {
 
 	return episode && <div>
 		<div style={{width: '100% !important'}}>{characters && characters.map(character => <SingleCharacter
-			key={character.id} character={character}/>)}</div>
+			key={character.id} character={character} history={props.history}/>)}</div>
 	</div>;
 };
 
 SingleEpisodeCharactersList.propTypes = {
+	history: PropTypes.object.isRequired,
 	episodeReducer: PropTypes.object.isRequired,
 	charactersReducer: PropTypes.object.isRequired,
 	getCharactersById: PropTypes.func.isRequired

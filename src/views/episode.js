@@ -9,12 +9,13 @@ import SingleEpisodeKeysList from '../components/single-episode-keys-list';
 import {getEpisode} from '../redux/actions/episode.action';
 import IntegrationFbComments from '../components/integration-fb-comments';
 import SingleEpisodeSkeleton from '../components/skeletons/single-episode-skeleton';
+import Header from '../components/header';
 
 import './styles/episode.css';
 import './styles/sheared.css';
 
 const Episode = (props) => {
-	const {episodeReducer, match} = props;
+	const {episodeReducer, match, history} = props;
 	const {id} = match.params;
 
 	useEffect(() => {
@@ -23,11 +24,13 @@ const Episode = (props) => {
 
 	return (
 		<div className='main'>
+			<Header/>
+			<div style={{height: 75}}/>
 			{episodeReducer.episode ?
 				<Paper className={'paper'}>
 					<SingleEpisodeKeysList id={parseInt(id)}/>
 					<Divider/>
-					<SingleEpisodeCharactersList/>
+					<SingleEpisodeCharactersList history={history}/>
 				</Paper> : <>
 					<SingleEpisodeSkeleton/>
 				</>}
@@ -39,7 +42,8 @@ const Episode = (props) => {
 Episode.propTypes = {
 	episodeReducer: PropTypes.object.isRequired,
 	getEpisode: PropTypes.func.isRequired,
-	match: PropTypes.object.isRequired
+	match: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

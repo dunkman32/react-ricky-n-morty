@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 const EpisodesTable = props => {
 	const classes = useStyles();
-	const {rows, setClicked, clicked, episodesReducer, main, getEpisodes} = props;
+	const {rows, setClicked, clicked, episodesReducer, main, getEpisodes, showFilterIcon} = props;
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
@@ -78,7 +78,7 @@ const EpisodesTable = props => {
 	return (
 		<div className={classes.root}>
 			{data && <Paper className={classes.paper}>
-				<FilterTable isEpisode/>
+				{showFilterIcon && <FilterTable isEpisode/>}
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -150,7 +150,8 @@ EpisodesTable.propTypes = {
 	clicked: PropTypes.bool,
 	getEpisodes: PropTypes.func.isRequired,
 	episodesReducer: PropTypes.object.isRequired,
-	main: PropTypes.bool
+	main: PropTypes.bool,
+	showFilterIcon: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

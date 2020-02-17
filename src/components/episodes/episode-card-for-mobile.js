@@ -10,7 +10,7 @@ import FavoriteIcon from '../favorite-icon';
 const EpisodeCardForMobile = (props) => {
 	const {id, name, air_date, episode, setClicked, clicked} = props.row;
 
-	const handleClick = (event, id) => {
+	const routeOnSingleEpisodePage = (event, id) => {
 		event.preventDefault();
 		props.history.push(`/episode/${id}`);
 	};
@@ -25,7 +25,7 @@ const EpisodeCardForMobile = (props) => {
 				</Grid>
 				<Grid item xs={4}>
 					<p>name{' - '}{name}</p>
-					<IconButton onClick={e => handleClick(e, id)}>
+					<IconButton onClick={e => routeOnSingleEpisodePage(e, id)}>
 						<Link/>
 					</IconButton>
 					<FavoriteIcon setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`episodes-${id}`}/>
