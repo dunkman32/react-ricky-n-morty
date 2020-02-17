@@ -23,7 +23,7 @@ const EpisodeCardForMobile = (props) => {
 				</Grid>
 				<Grid item xs={4}>
 					<p>name{' - '}{name}</p>
-					<FavoriteIcon style={{zIndex: 1000}} id={id}/>
+					<FavoriteIcon style={{zIndex: 1000}} id={`episodes-${id}`}/>
 				</Grid>
 			</Grid>
 		</Paper>

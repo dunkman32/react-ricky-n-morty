@@ -52,14 +52,14 @@ const useStyles = makeStyles(theme => ({
 }));
 const CharactersTable = props => {
 	const classes = useStyles();
-	const {rows} = props;
+	const {rows, setClicked, clicked} = props;
 
 	const [openImageDialog, setOpenImageDialog] = React.useState(false);
 	const [order, setOrder] = React.useState('asc');
 	const [image, setImage] = React.useState(null);
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
+	const [rowsPerPage, setRowsPerPage] = React.useState(rows.length || 10);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
@@ -140,7 +140,7 @@ const CharactersTable = props => {
 												{row.gender}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon style={{zIndex: 1000}} id={`characters-${row.id}`}/>
+												<FavoriteIcon  setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`characters-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);
@@ -170,11 +170,12 @@ const CharactersTable = props => {
 	);
 };
 
-
 CharactersTable.propTypes = {
-	info: PropTypes.object.isRequired,
+	info: PropTypes.object,
 	rows: PropTypes.array.isRequired,
 	history: PropTypes.object.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool
 };
 
 export default CharactersTable;

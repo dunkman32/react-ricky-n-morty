@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const FavoriteIcon = (props) => {
-	const {id} = props;
+	const {id, clicked, setClicked} = props;
 	const [favorites, setFavorites] = React.useState({});
 	const [checked, setChecked] = React.useState(0);
 
@@ -15,6 +15,7 @@ const FavoriteIcon = (props) => {
 	};
 
 	const markAsFavorite = (id) => {
+		if(setClicked) setClicked(!clicked);
 		const saved = localStorage.getItem(id.toString());
 		if (saved) {
 			localStorage.removeItem(id.toString());
@@ -48,6 +49,8 @@ const FavoriteIcon = (props) => {
 
 FavoriteIcon.propTypes = {
 	id: PropTypes.any.isRequired,
+	setClicked: PropTypes.func,
+	clicked: PropTypes.bool,
 };
 
 

@@ -32,7 +32,7 @@ const SingleEpisodeKeysList = (props) => {
 	const {episode} = props.episodeReducer;
 	return (episode &&
         <div className={classes.root}>
-        	<div className={classes.actions}><FavoriteIcon id={props.id}/></div>
+        	<div className={classes.actions}><FavoriteIcon id={`episodes-${props.id}`}/></div>
         	<List component="nav" aria-label="secondary mailbox folders">
         		<ListItem><ListItemText primary={`Id - ${episode.id}`}/></ListItem>
         		<ListItem><ListItemText primary={`Name - ${episode.name}`}/></ListItem>
