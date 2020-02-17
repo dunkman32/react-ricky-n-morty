@@ -8,11 +8,11 @@ import SingleCharacterEpisodeTable from '../components/character/single-characte
 import IntegrationFbComments from '../components/integration-fb-comments';
 import SingleCharacterSkeleton from '../components/skeletons/single-character-skeleton';
 import {getCharacter} from '../redux/actions/character.action';
-import Loading from '../components/loading/loading';
 
 import './styles/character.css';
 import './styles/episode.css';
 import './styles/sheared.css';
+
 const Character = (props) => {
 
 	const {history, characterReducer, match, getCharacter} = props;
@@ -30,7 +30,6 @@ const Character = (props) => {
 				<SingleCharacterEpisodeTable history={history}/>
 			</> : <>
 				<SingleCharacterSkeleton/>
-				<Loading/>
 			</>}
 			<div style={{marginTop: '58vh'}}>
 				<IntegrationFbComments/>

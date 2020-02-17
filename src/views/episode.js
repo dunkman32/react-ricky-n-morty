@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
-import Loading from '../components/loading/loading';
 
 import SingleEpisodeCharactersList from '../components/single-episode-characters-list';
 import SingleEpisodeKeysList from '../components/single-episode-keys-list';
@@ -31,7 +30,6 @@ const Episode = (props) => {
 					<SingleEpisodeCharactersList/>
 				</Paper> : <>
 					<SingleEpisodeSkeleton/>
-					<Loading/>
 				</>}
 			<IntegrationFbComments/>
 		</div>
