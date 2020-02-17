@@ -8,6 +8,7 @@ import SingleCharacterEpisodeTable from '../components/character/single-characte
 import IntegrationFbComments from '../components/integration-fb-comments';
 import SingleCharacterSkeleton from '../components/skeletons/single-character-skeleton';
 import {getCharacter} from '../redux/actions/character.action';
+import Header from '../components/header';
 
 import './styles/character.css';
 import './styles/episode.css';
@@ -24,6 +25,7 @@ const Character = (props) => {
 
 	return (
 		<div className={'main'}>
+			<Header transparent/>
 			{characterReducer.character ? <>
 				<SingleCharacterPageHeader data={characterReducer.character}/>
 				<Divider/>

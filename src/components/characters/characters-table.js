@@ -8,15 +8,13 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import {makeStyles} from '@material-ui/core/styles';
+import {connect} from 'react-redux';
 
 import FavoriteIcon from '../favorite-icon';
 import EnhancedTableHead from '../table-head';
 import {getComparator, stableSort} from '../../utils/table-utils';
 import CharactersImageDialog from '../characters-image-dialog';
 import {getCharacters} from '../../redux/actions/characters.action';
-import {connect} from 'react-redux';
-import IconButton from '@material-ui/core/IconButton';
-import {FilterList} from '@material-ui/icons';
 import FilterTable from '../filter';
 
 const headCells = [
@@ -57,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CharactersTable = props => {
 	const classes = useStyles();
-	const {rows, setClicked, clicked, main, charactersReducer, getCharacters} = props;
+	const {rows, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
 
 	const [openImageDialog, setOpenImageDialog] = React.useState(false);
 	const [order, setOrder] = React.useState('asc');
@@ -88,7 +86,7 @@ const CharactersTable = props => {
 	return (
 		<div className={classes.root}>
 			{data && <Paper className={classes.paper}>
-				<FilterTable/>
+				{showFilterIcon && <FilterTable/>}
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -175,7 +173,8 @@ CharactersTable.propTypes = {
 	setClicked: PropTypes.func,
 	clicked: PropTypes.bool,
 	getCharacters: PropTypes.func.isRequired,
-	charactersReducer: PropTypes.object.isRequired
+	charactersReducer: PropTypes.object.isRequired,
+	showFilterIcon: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

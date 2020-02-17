@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import {Paper} from '@material-ui/core';
 import {isMobile} from 'react-device-detect';
 //methods
 //components
 import Footer from '../components/footer';
 import EpisodesTable from '../components/episodes/episodes-table';
+import Header from '../components/header';
 //css
 import './styles/episodes.css';
 import './styles/sheared.css';
@@ -19,14 +19,15 @@ const Episodes = props => {
 
 	return (
 		<div className='main'>
-			<div style={{height: 75}}>
+			<Header transparent/>
+			<div style={{height: 100}}>
 				<div className="background"/>
 			</div>
 			<>
 				<div className={'paper'}>
 					{
-						!isMobile ? <EpisodesTable main history={history}/> :
-							<EpisodesTableForMobile main history={history}/>
+						!isMobile ? <EpisodesTable showFilterIcon main history={history}/> :
+							<EpisodesTableForMobile showFilterIcon main history={history}/>
 					}
 				</div>
 			</>

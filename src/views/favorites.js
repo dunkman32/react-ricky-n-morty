@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {isMobile} from 'react-device-detect';
 import randomColor from 'randomcolor';
+
 import CharactersTable from '../components/characters/characters-table';
 import {takeFavoritesId} from '../utils/utils';
 import {getCharactersById} from '../redux/actions/characters.action';
@@ -13,6 +14,7 @@ import {getEpisodesById} from '../redux/actions/episodes.action';
 import EpisodesTable from '../components/episodes/episodes-table';
 import EpisodesTableForMobile from '../components/episodes/episodes-table-for-mobile';
 import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
+import Header from '../components/header';
 
 const Favorites = props => {
 	const color = randomColor({luminosity: 'dark'});
@@ -25,7 +27,8 @@ const Favorites = props => {
 	}, [clicked, isCharacter]);
 
 	return <div className={'main'}>
-		<div style={{height: 75}}>
+		<Header transparent/>
+		<div style={{height: 100}}>
 			<div style={{position: 'relative', height: '45vh'}}>
 				<ParticlesBg numbers={isMobile ? 60 : 100}/>
 			</div>

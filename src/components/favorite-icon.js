@@ -36,9 +36,9 @@ const FavoriteIcon = (props) => {
 	};
 
 	return (
-		<Tooltip title="Favorite">
+		<Tooltip title="mark as favorite">
 			<IconButton
-				style={{color: fillIconIfItemMarkedAsFavourite(id) ? '#FFD700' : '#cbcbcb'}}
+				style={{color: fillIconIfItemMarkedAsFavourite(id) ? '#ff0000' : '#cbcbcb', zIndex: 1000}}
 				onClick={() => markAsFavorite(id)}
 				aria-label="Favorite">
 				<Favorite/>

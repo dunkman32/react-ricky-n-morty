@@ -6,6 +6,7 @@ import {isMobile} from 'react-device-detect';
 
 import CharactersTable from '../components/characters/characters-table';
 import Footer from '../components/footer';
+import Header from '../components/header';
 
 import './styles/characters.css';
 import './styles/sheared.css';
@@ -17,13 +18,14 @@ const Characters = props => {
 
 	return (
 		<div className={'main'}>
-			<div style={{height: 75}}>
+			<Header transparent/>
+			<div style={{height: 100}}>
 				<div className="background"/>
 			</div>
 			<div className={'paper'}>
 				{!isMobile ?
-					<CharactersTable main info={charactersReducer.info} history={history}/> :
-					<CharactersTableForMobile main history={history}/>
+					<CharactersTable showFilterIcon main info={charactersReducer.info} history={history}/> :
+					<CharactersTableForMobile showFilterIcon main history={history}/>
 				}
 			</div>
 			<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.results}/>

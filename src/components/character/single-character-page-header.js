@@ -9,10 +9,12 @@ const SingleCharacterPageHeader = props => {
 	return (
 		<div className={Css.main}>
 			<div className={Css.upper}>
-				<div className={Css.favoriteIcon}>
-					<FavoriteIcon id={`characters-${data.id}`}/>
+				<div className={Css.imageDiv}>
+					<div className={Css.favoriteIcon}>
+						<FavoriteIcon id={`characters-${data.id}`}/>
+					</div>
+					<img className={Css.image} src={data.image} alt="character"/>
 				</div>
-				<img src={data.image} className={Css.image} alt="character"/>
 			</div>
 			<div className={Css.infos}>
 				<div className={Css.infoTexts}>
