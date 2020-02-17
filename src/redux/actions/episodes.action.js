@@ -4,14 +4,13 @@ import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
 import toggleLoading from './loading.action';
 import {readCharactersById} from '../service/characters.service';
 
-const getEpisodes = page => {
-
+const getEpisodes = params => {
 	let url = 'https://rickandmortyapi.com/api/episode';
-	if (page) url = `https://rickandmortyapi.com/api/episode?page=${page}`;
+	console.log(params);
 	return async dispatch => {
 		await dispatch(toggleLoading(true));
 		try {
-			const res = await readEpisodes(url);
+			const res = await readEpisodes(url, params);
 			if (res.data) {
 				const {info, results} = res.data;
 				dispatch({
