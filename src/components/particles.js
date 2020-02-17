@@ -6,7 +6,7 @@ const ParticlesBg = ({numbers}) => {
 	return (
 		<Particles
 			style={{
-				backgroundColor: '#374057',
+				backgroundImage: 'linear-gradient(to bottom, rgba(96, 168, 233, 0.9), rgba(214, 47, 166, 0.3), rgba(214, 47, 166, 0.1))',
 				position: 'absolute',
 				top: 0, left: 0, right: 0,
 			}}

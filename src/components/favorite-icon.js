@@ -15,7 +15,7 @@ const FavoriteIcon = (props) => {
 	};
 
 	const markAsFavorite = (id) => {
-		setClicked(!clicked);
+		if(setClicked) setClicked(!clicked);
 		const saved = localStorage.getItem(id.toString());
 		if (saved) {
 			localStorage.removeItem(id.toString());
