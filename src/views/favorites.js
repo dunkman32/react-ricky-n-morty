@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Paper} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {isMobile} from 'react-device-detect';

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import {Paper} from '@material-ui/core';
+import {isMobile} from	'react-device-detect';
 
 import {getCharacters} from '../redux/actions/characters.action';
 
@@ -13,6 +14,7 @@ import TableSkeleton from '../components/skeletons/table-skeleton';
 
 import './styles/characters.css';
 import './styles/sheared.css';
+import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
 
 const Characters = props => {
 	const {charactersReducer, history, getCharacters} = props;
@@ -29,9 +31,13 @@ const Characters = props => {
 			</div>
 			
 			{charactersReducer.results ?
-				<Paper className={'paper'}>
-					<CharactersTable info={charactersReducer.info} rows={charactersReducer.results} history={history}/>
-				</Paper>
+				<div className={'paper'}>
+					{!isMobile ?
+						<CharactersTable info={charactersReducer.info} rows={charactersReducer.results}
+										 history={history}/> :
+						<CharactersTableForMobile rows={charactersReducer.results} history={history}/>
+					}
+				</div>
 				: <>
 					<TableSkeleton/>
 					<Loading/>
