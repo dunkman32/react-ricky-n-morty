@@ -20,7 +20,7 @@ const CharacterCardForMobile = (props) => {
 
 	return (
 		<Paper className={Css.card}>
-			<Grid container spacing={3}>
+			<Grid container spacing={1}>
 				<Grid item xs={12}  className={Css.outerGrid}>
 					<div className={Css.imageGrid}>
 						<img src={image} alt="character" className={Css.image}/>

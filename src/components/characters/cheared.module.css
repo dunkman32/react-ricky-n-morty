@@ -14,9 +14,15 @@
 }
 
 .outerGrid {
+    width: min-content;
     height: 0;
 }
 
 .card {
     margin-bottom: 52px;
+}
+
+.root {
+    width: 96%;
+    margin: 0 auto;
 }

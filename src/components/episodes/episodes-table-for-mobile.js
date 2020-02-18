@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import EpisodeCardForMobile from './episode-card-for-mobile';
 import {getEpisodes} from '../../redux/actions/episodes.action';
 import FilterTable from '../filter';
-
+import Css from './sheared.module.css';
 
 const EpisodesTableForMobile = props => {
 	const {rows, history, setClicked, clicked, episodesReducer, main, getEpisodes, showFilterIcon} = props;
@@ -17,7 +17,7 @@ const EpisodesTableForMobile = props => {
 	}, [page]);
 
 	return (
-		<div>
+		<div className={Css.root}>
 			{
 				data && <>
 					{showFilterIcon && <FilterTable isEpisode/>}
