@@ -1,5 +1,7 @@
 const defaultState = {
-	characters: null
+	characters: null,
+	info: null,
+	results: null,
 };
 
 const CharactersReducer = (state = defaultState, action) => {
