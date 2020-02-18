@@ -30,7 +30,7 @@ const Favorites = props => {
 	const isRequestAllowed = isCharacter ? haveLength(charactersId): haveLength(episodesId) || false;
 
 	useEffect(() => {
-		if (isRequestAllowed || clicked,  haveLength(episodesId)) {
+		if (isRequestAllowed || clicked) {
 			isCharacter ? getCharactersById(charactersId) : getEpisodesById(episodesId);
 		}
 	}, [clicked, isCharacter]);
