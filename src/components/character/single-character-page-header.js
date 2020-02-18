@@ -22,7 +22,7 @@ const SingleCharacterPageHeader = props => {
 						{data.name}{' ,'}{data.id}
 					</h3>
 					<div className={Css.gridDiv}>
-						<Grid style={{width: 400}} container spacing={3}>
+						<Grid style={{width: 300}} container spacing={3}>
 							<Grid item xs={6}>
 								<span>{data.species}</span>
 								<span>{data.status}</span>
