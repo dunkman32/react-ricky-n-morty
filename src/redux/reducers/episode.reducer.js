@@ -1,5 +1,5 @@
 const defaultState = {
-	data: null
+	episode: null
 };
 
 const EpisodeReducer = (state = defaultState, action) => {
