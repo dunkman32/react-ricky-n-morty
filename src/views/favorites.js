@@ -10,7 +10,7 @@ import {getEpisodesById} from '../redux/actions/episodes.action';
 import {getCharactersById} from '../redux/actions/characters.action';
 
 import Header from '../components/header';
-import Footer from '../components/footer';
+import Footer from '../components/footer/footer';
 import ParticlesBg from '../components/particles';
 import EpisodesTable from '../components/episodes/episodes-table';
 import TableSkeleton from '../components/skeletons/table-skeleton';

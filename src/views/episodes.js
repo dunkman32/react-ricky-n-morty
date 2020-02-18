@@ -5,7 +5,7 @@ import randomColor from 'randomcolor';
 import {isMobile} from 'react-device-detect';
 //methods
 //components
-import Footer from '../components/footer';
+import Footer from '../components/footer/footer';
 import EpisodesTable from '../components/episodes/episodes-table';
 import Header from '../components/header';
 //css
