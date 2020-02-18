@@ -8,7 +8,7 @@ const episodeObj = {
 	'episode': 'S01E01',
 };
 
-describe('character reducer', () => {
+describe('episode reducer', () => {
 
 	it('should test reducer with undefined state', () => {
 		expect(EpisodeReducer(undefined, {
