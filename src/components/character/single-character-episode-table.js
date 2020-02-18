@@ -6,6 +6,7 @@ import {isMobile} from 'react-device-detect';
 import EpisodesTable from '../episodes/episodes-table';
 import {getEpisodesById} from '../../redux/actions/episodes.action';
 import EpisodesTableForMobile from '../episodes/episodes-table-for-mobile';
+import {returnRowsArray} from '../../utils/utils';
 
 import Css from './cheared.module.css';
 
@@ -19,12 +20,10 @@ const SingleCharacterEpisodeTable = props => {
 		getEpisodesById(takeEpisodesId(character.episode));
 	}, []);
 
-	const returnEpisodesArray = episodes => (episodes instanceof Array) ? episodes : [episodes];
-
 	return (
 		<div className={Css.table}>
-			{episodes && (!isMobile? <EpisodesTable history={history} rows={returnEpisodesArray(episodes)}/>:
-				<EpisodesTableForMobile history={history} rows={returnEpisodesArray(episodes)}/>
+			{episodes && (!isMobile? <EpisodesTable history={history} rows={returnRowsArray(episodes)}/>:
+				<EpisodesTableForMobile history={history} rows={returnRowsArray(episodes)}/>
 			)}
 		</div>
 	);
