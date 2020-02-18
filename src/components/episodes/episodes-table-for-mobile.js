@@ -22,10 +22,10 @@ const EpisodesTableForMobile = props => {
 				data && <>
 					{showFilterIcon && <FilterTable isEpisode/>}
 					{
-						data.map(row => <div key={row.id}>
+						data.map(row => (!row.info && !row.results) &&(<div key={row.id}>
 							<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history}
 								row={row}/>
-						</div>)
+						</div>))
 					}
 					{
 						(main && episodesReducer.info) && <>{

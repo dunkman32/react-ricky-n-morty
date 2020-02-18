@@ -111,7 +111,7 @@ const CharactersTable = props => {
 						<TableBody>
 							{stableSort(data, getComparator(order, orderBy))
 								.map((row) => {
-									return (
+									return (!row.info && !row.results) &&(
 										<TableRow
 											style={{cursor: 'pointer'}}
 											hover
