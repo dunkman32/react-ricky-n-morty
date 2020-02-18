@@ -4,26 +4,35 @@ import {connect} from 'react-redux';
 import {isMobile} from 'react-device-detect';
 import randomColor from 'randomcolor';
 
-import CharactersTable from '../components/characters/characters-table';
 import {takeFavoritesId} from '../utils/utils';
+import {returnRowsArray} from '../utils/utils';
+import {getEpisodesById} from '../redux/actions/episodes.action';
 import {getCharactersById} from '../redux/actions/characters.action';
-import TableSkeleton from '../components/skeletons/table-skeleton';
+
+import Header from '../components/header';
 import Footer from '../components/footer';
 import ParticlesBg from '../components/particles';
-import {getEpisodesById} from '../redux/actions/episodes.action';
 import EpisodesTable from '../components/episodes/episodes-table';
+import TableSkeleton from '../components/skeletons/table-skeleton';
+import CharactersTable from '../components/characters/characters-table';
 import EpisodesTableForMobile from '../components/episodes/episodes-table-for-mobile';
 import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
-import Header from '../components/header';
 
 const Favorites = props => {
-	const color = randomColor({luminosity: 'dark'});
-	const {charactersReducer, history, getCharactersById, getEpisodesById, location, episodesReducer} = props;
 	const [clicked, setClicked] = useState(false);
+	const color = randomColor({luminosity: 'dark'});
+	const episodesId = takeFavoritesId('episodes');
+	const charactersId = takeFavoritesId('characters');
+	const {charactersReducer, history, getCharactersById, getEpisodesById, location, episodesReducer} = props;
 	const isCharacter = location.pathname === '/favorite-characters';
 
+	const haveLength = arrayEl => arrayEl && arrayEl.length;
+	const isRequestAllowed = isCharacter ? haveLength(charactersId): haveLength(episodesId) || false;
+
 	useEffect(() => {
-		isCharacter ? getCharactersById(takeFavoritesId('characters')) : getEpisodesById(takeFavoritesId('episodes'));
+		if (isRequestAllowed || clicked,  haveLength(episodesId)) {
+			isCharacter ? getCharactersById(charactersId) : getEpisodesById(episodesId);
+		}
 	}, [clicked, isCharacter]);
 
 	return <div className={'main'}>
@@ -32,31 +41,35 @@ const Favorites = props => {
 			<div style={{position: 'relative', height: '45vh'}}>
 				<ParticlesBg numbers={isMobile ? 60 : 100}/>
 			</div>
-
 		</div>
 		{isCharacter ? charactersReducer.characters ?
-			<><div className={'paper'}>
-				{!isMobile? <CharactersTable setClicked={setClicked} clicked={clicked} rows={charactersReducer.characters}
-					history={history}/>:
-					<CharactersTableForMobile setClicked={setClicked} clicked={clicked} rows={charactersReducer.characters} history={history}/>
-				}
-			</div>
-			<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.characters}/>
+			<>
+				<div className={'paper'}>
+					{
+						!isMobile ?
+							<CharactersTable setClicked={setClicked} clicked={clicked}
+								rows={returnRowsArray(charactersReducer.characters)} history={history}/> :
+							<CharactersTableForMobile setClicked={setClicked} clicked={clicked}
+								rows={returnRowsArray(charactersReducer.characters)}
+								history={history}/>
+					}
+				</div>
+				<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.characters}/>
 			</>
-			: <>
-				<TableSkeleton/>
-			</> : episodesReducer.episodes ?
-			<><div className={'paper'}>
-				{
-					!isMobile ? <EpisodesTable setClicked={setClicked} clicked={clicked} rows={episodesReducer.episodes} history={history}/> :
-						<EpisodesTableForMobile setClicked={setClicked} clicked={clicked} rows={episodesReducer.episodes} history={history}/>
-				}
-			</div>
-			<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.episodes}/>
+			: <TableSkeleton/> : episodesReducer.episodes ?
+			<>
+				<div className={'paper'}>
+					{
+						!isMobile ?
+							<EpisodesTable setClicked={setClicked} clicked={clicked} main={false}
+								rows={returnRowsArray(episodesReducer.episodes)} history={history}/> :
+							<EpisodesTableForMobile setClicked={setClicked} clicked={clicked} main={false}
+								rows={returnRowsArray(episodesReducer.episodes)} history={history}/>
+					}
+				</div>
+				<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.episodes}/>
 			</>
-			: <>
-				<TableSkeleton/>
-			</>
+			: <TableSkeleton/>
 		}
 	</div>;
 };
