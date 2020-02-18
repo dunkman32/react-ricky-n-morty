@@ -1,19 +1,21 @@
 import {expect} from 'chai';
-import LoadingReducer from "../loading.reducer";
+import NotificationReducer from '../notification.reducer';
 
 const defaultActions = {
-    show: false
-}
+	message: 'action.message',
+};
 
-describe('loading reducer', () => {
+describe('notification reducer', () => {
 
-    it('should test reducer with undefined state', () => {
-        expect(LoadingReducer(undefined, defaultActions).show).equal(false);
-    });
+	it('should test reducer with undefined state', () => {
+		expect(NotificationReducer(undefined, {})).equal(null);
+	});
 
-    it('should test reducer with defined state', () => {
-        expect(LoadingReducer({}, {type: 'TOGGLE_LOADING',show: true}).show).equal(true);
-        expect(LoadingReducer({}, {type: 'TOGGLE_LOADING',show: false}).show).equal(false);
-    });
+	it('should test reducer with defined state', () => {
+		expect(NotificationReducer({}, {type: 'NOTIFICATION_ERROR',...defaultActions}).message).equal(defaultActions.message);
+		expect(NotificationReducer({}, {type: 'NOTIFICATION_INFO',...defaultActions}).message).equal(defaultActions.message);
+		expect(NotificationReducer({}, {type: 'NOTIFICATION_SUCCESS',...defaultActions}).message).equal(defaultActions.message);
+		expect(NotificationReducer({}, {type: 'NOTIFICATION_WARNING',...defaultActions}).message).equal(defaultActions.message);
+	});
 
 });
