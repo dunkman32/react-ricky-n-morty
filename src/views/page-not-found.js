@@ -5,7 +5,7 @@ import {isMobile} from 'react-device-detect';
 import {makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-import Footer from '../components/footer';
+import Footer from '../components/footer/footer';
 import pattern from '../static/pattern.svg';
 import travolta from '../static/travolta.gif';
 

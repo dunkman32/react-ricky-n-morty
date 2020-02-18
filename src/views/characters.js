@@ -5,7 +5,7 @@ import randomColor from 'randomcolor';
 import {isMobile} from 'react-device-detect';
 
 import CharactersTable from '../components/characters/characters-table';
-import Footer from '../components/footer';
+import Footer from '../components/footer/footer';
 import Header from '../components/header';
 
 import './styles/characters.css';

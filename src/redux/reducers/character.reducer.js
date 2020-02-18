@@ -1,5 +1,5 @@
 const defaultState = {
-	data: null
+	character: null
 };
 
 const CharacterReducer = (state = defaultState, action) => {

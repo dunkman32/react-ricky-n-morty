@@ -49,5 +49,4 @@ Footer.propTypes = {
 	fixed: PropTypes.bool.isRequired,
 };
 
-
 export default Footer;
