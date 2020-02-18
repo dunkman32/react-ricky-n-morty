@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 import CharacterCardForMobile from './character-card-for-mobile';
-import Button from '@material-ui/core/Button';
 import {getCharacters} from '../../redux/actions/characters.action';
-import {connect} from 'react-redux';
-import FilterTable from "../filter";
+import FilterTable from '../filter';
 
 const CharactersTableForMobile = props => {
 	const {rows, history, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
@@ -20,7 +20,7 @@ const CharactersTableForMobile = props => {
 		<div>
 			{
 				data && <>
-				{showFilterIcon && <FilterTable/>}
+					{showFilterIcon && <FilterTable/>}
 					{
 						data.map(row => <div key={row.id}>
 							<CharacterCardForMobile setClicked={setClicked} clicked={clicked} history={history} row={row}/>

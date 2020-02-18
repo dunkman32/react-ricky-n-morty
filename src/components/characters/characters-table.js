@@ -80,12 +80,14 @@ const CharactersTable = props => {
 	};
 
 	useEffect(() => {
-		if (main) getCharacters({page: page + 1});
+		if (main) {
+			getCharacters({page: page + 1});
+		}
 	}, [page]);
 
 	return (
 		<div className={classes.root}>
-			{data && <Paper className={classes.paper}>
+			{data && data.length  && <Paper className={classes.paper}>
 				{showFilterIcon && <FilterTable/>}
 				<TableContainer>
 					<Table
