@@ -8,19 +8,22 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Moment from 'react-moment';
+import {connect} from 'react-redux';
 
 import {getComparator, stableSort} from '../../utils/table-utils';
 import EnhancedTableHead from '../table-head';
 import FavoriteIcon from '../favorite-icon';
 import {getEpisodes} from '../../redux/actions/episodes.action';
-import {connect} from 'react-redux';
 import FilterTable from '../filter';
+
 
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
 	{id: 'name', disablePadding: false, label: 'Name'},
 	{id: 'episode', diablePadding: false, label: 'Code'},
 	{id: 'air_date', disablePadding: false, label: 'Air Date'},
+	{id: 'created', disablePadding: false, label: 'Created'},
 	{id: 'actions', disablePadding: false, label: 'Actions'},
 ];
 
@@ -120,6 +123,9 @@ const EpisodesTable = props => {
 											</TableCell>
 											<TableCell onClick={event => handleClick(event, row.id)}>
 												{row.air_date}
+											</TableCell>
+											<TableCell onClick={event => handleClick(event, row.id)}>
+												<Moment format="YYYY/MM/DD HH:mm">{row.created}</Moment>
 											</TableCell>
 											<TableCell>
 												<FavoriteIcon clicked={clicked} setClicked={setClicked} style={{zIndex: 1000}} id={`episodes-${row.id}`}/>

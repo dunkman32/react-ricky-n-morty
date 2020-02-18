@@ -9,6 +9,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import {makeStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
+import Moment from 'react-moment';
+import {Tooltip} from '@material-ui/core';
 
 import FavoriteIcon from '../favorite-icon';
 import EnhancedTableHead from '../table-head';
@@ -17,11 +19,13 @@ import CharactersImageDialog from '../characters-image-dialog';
 import {getCharacters} from '../../redux/actions/characters.action';
 import FilterTable from '../filter';
 
+
 const headCells = [
 	{id: 'id', disablePadding: false, label: 'ID'},
 	{id: 'name', disablePadding: false, label: 'Name'},
 	{id: 'image', disablePadding: false, label: 'Image'},
 	{id: 'status', disablePadding: false, label: 'Status'},
+	{id: 'created', disablePadding: false, label: 'created'},
 	{id: 'species', disablePadding: false, label: 'Species'},
 	{id: 'gender', diablePadding: false, label: 'Gender'},
 	{id: 'actions', disablePadding: false, label: 'Actions'},
@@ -87,7 +91,7 @@ const CharactersTable = props => {
 
 	return (
 		<div className={classes.root}>
-			{data && data.length  && <Paper className={classes.paper}>
+			{data && data.length && <Paper className={classes.paper}>
 				{showFilterIcon && <FilterTable/>}
 				<TableContainer>
 					<Table
@@ -130,10 +134,15 @@ const CharactersTable = props => {
 												setOpenImageDialog(true);
 												setImage(row.image);
 											}}>
-												<img src={row.image} alt="character" className={classes.image}/>
+												<Tooltip title={'click to see large image'}>
+													<img src={row.image} alt="character" className={classes.image}/>
+												</Tooltip>
 											</TableCell>
 											<TableCell onClick={event => handleClick(event, row.id)}>
 												{row.status}
+											</TableCell>
+											<TableCell onClick={event => handleClick(event, row.id)}>
+												<Moment format="YYYY/MM/DD HH:mm">{row.created}</Moment>
 											</TableCell>
 											<TableCell onClick={event => handleClick(event, row.id)}>
 												{row.species}

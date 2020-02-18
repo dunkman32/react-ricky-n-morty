@@ -4,11 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import {Link} from '@material-ui/icons';
+import Moment from 'react-moment';
 
 import FavoriteIcon from '../favorite-icon';
 
 const EpisodeCardForMobile = (props) => {
-	const {id, name, air_date, episode, setClicked, clicked} = props.row;
+	const {id, name, air_date, episode, setClicked, clicked, created} = props.row;
 
 	const routeOnSingleEpisodePage = (event, id) => {
 		event.preventDefault();
@@ -25,6 +26,9 @@ const EpisodeCardForMobile = (props) => {
 				</Grid>
 				<Grid item xs={4}>
 					<p>name{' - '}{name}</p>
+					<p>created{' - '}
+						<Moment format="YYYY/MM/DD">{created}</Moment>
+					</p>
 					<IconButton onClick={e => routeOnSingleEpisodePage(e, id)}>
 						<Link/>
 					</IconButton>

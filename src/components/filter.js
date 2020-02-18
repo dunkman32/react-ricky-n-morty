@@ -82,7 +82,7 @@ const FilterTable = (props) => {
 		if (!isEpisode) {
 			if (status) tmp.status = status;
 			if (species) tmp.species = species;
-			if (gender) tmp.status = gender;
+			if (gender) tmp.gender = gender;
 		}
 		return tmp;
 	};
@@ -152,7 +152,7 @@ const FilterTable = (props) => {
                         Close
 					</Button>
 					<Button autoFocus onClick={getFilteredData} color="primary">
-                        Save changes
+						Filter
 					</Button>
 				</DialogActions>
 			</Dialog>
