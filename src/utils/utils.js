@@ -15,6 +15,9 @@ const takeFavoritesId = word => {
 	return favorites.map(takeId);
 };
 
+const returnRowsArray = rows => (rows instanceof Array) ? rows : [rows];
+
 export {
 	takeFavoritesId,
+	returnRowsArray
 };
