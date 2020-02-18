@@ -4,13 +4,14 @@ import Grid from '@material-ui/core/Grid';
 import {Link} from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
+import Moment from 'react-moment';
 
 import FavoriteIcon from '../favorite-icon';
 
 import Css from './cheared.module.css';
 
 const CharacterCardForMobile = (props) => {
-	const {id, name, status, gender, image} = props.row;
+	const {id, name, status, gender, image, created} = props.row;
 
 	const handleClick = (event, id) => {
 		event.preventDefault();
@@ -29,9 +30,13 @@ const CharacterCardForMobile = (props) => {
 					<p>id{' - '}{id}</p>
 					<p>Status{' - '}{status}</p>
 					<p>gender{' - '}{gender}</p>
+
 				</Grid>
 				<Grid item xs={6}>
 					<p>name{' - '}{name}</p>
+					<p>created{' - '}
+						<Moment format="YYYY/MM/DD">{created}</Moment>
+					</p>
 					<IconButton onClick={e => handleClick(e, id)}>
 						<Link/>
 					</IconButton>

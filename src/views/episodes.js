@@ -31,7 +31,7 @@ const Episodes = props => {
 					}
 				</div>
 			</>
-			<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.results}/>
+			<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.results || episodesReducer.results.length < 5}/>
 		</div>
 	);
 };

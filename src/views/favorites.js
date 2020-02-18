@@ -54,7 +54,7 @@ const Favorites = props => {
 								history={history}/>
 					}
 				</div>
-				<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.characters}/>
+				<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.characters || charactersReducer.characters.length < 5}/>
 			</>
 			: <TableSkeleton/> : episodesReducer.episodes ?
 			<>
@@ -67,7 +67,7 @@ const Favorites = props => {
 								rows={returnRowsArray(episodesReducer.episodes)} history={history}/>
 					}
 				</div>
-				<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.episodes}/>
+				<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.episodes || episodesReducer.episodes.length < 5}/>
 			</>
 			: <TableSkeleton/>
 		}
