@@ -6,7 +6,6 @@ import {readCharactersById} from '../service/characters.service';
 
 const getEpisodes = params => {
 	let url = 'https://rickandmortyapi.com/api/episode';
-	console.log(params);
 	return async dispatch => {
 		await dispatch(toggleLoading(true));
 		try {

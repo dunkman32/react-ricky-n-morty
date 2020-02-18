@@ -22,7 +22,7 @@ const CharactersTableForMobile = props => {
 				data && <>
 					{showFilterIcon && <FilterTable/>}
 					{
-						data.map(row => <div key={row.id}>
+						data.map(row => (!row.info && !row.results) && <div key={row.id}>
 							<CharacterCardForMobile setClicked={setClicked} clicked={clicked} history={history} row={row}/>
 						</div>)
 					}
