@@ -13,11 +13,11 @@ describe('episode reducer', () => {
 	it('should test reducer with undefined state', () => {
 		expect(EpisodeReducer(undefined, {
 		    episode: null
-        }).episode).equal(null);
+		}).episode).equal(null);
 	});
 
 	it('should test reducer with defined state', () => {
-		expect(EpisodeReducer({}, {type: 'GET_EPISODE',...episodeObj}).gender).equal(episodeObj.gender);
+		expect(EpisodeReducer({}, {type: 'GET_EPISODE', episode: episodeObj}).episode).equal(episodeObj);
 	});
 
 });

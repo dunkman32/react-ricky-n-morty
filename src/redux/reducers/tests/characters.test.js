@@ -47,8 +47,8 @@ describe('characters reducer', () => {
 	});
 
 	it('should test reducer with defined state action = GET_CHARACTERS_BY_ID', () => {
-	    const getCharactersById = CharactersReducer({}, {type: 'GET_CHARACTERS_BY_ID', ...charactersObjForIDS});
-		expect(getCharactersById).equal(getCharactersById);
+	    const getCharactersById = CharactersReducer({}, {type: 'GET_CHARACTERS_BY_ID', characters: charactersObjForIDS});
+		expect(getCharactersById.characters).equal(charactersObjForIDS);
 	});
 
 	it('should test reducer with defined state action = GET_CHARACTERS ', () => {

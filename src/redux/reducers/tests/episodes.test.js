@@ -6,7 +6,7 @@ const defaultActions = {
 	results: null,
 	episodes: null
 };
-const episodes = {
+const infoAndResults = {
 	'info': {
 		'count': 31,
 		'pages': 2,
@@ -20,7 +20,7 @@ const episodes = {
 		'episode': 'S01E01',
 	}]
 };
-const infoAndResults = [
+const episodes = [
 	{
 		'id': 10,
 		'name': 'Close Rick-counters of the Rick Kind',
@@ -45,16 +45,16 @@ describe('episodes reducer', () => {
 	});
 
 	it('should test reducer with defined state action = GET_EPISODES_BY_ID', () => {
-		const getEpidodesById = EpisodesReducer({}, {type: 'GET_EPISODES_BY_ID', ...infoAndResults});
-		expect(getEpidodesById).equal(getEpidodesById);
+		const getEpidodesById = EpisodesReducer({}, {type: 'GET_EPISODES_BY_ID', episodes});
+		expect(getEpidodesById.episodes).equal(episodes);
 	});
 
 	it('should test reducer with defined state action = GET_EPISODES ', () => {
 		const reducerGetEpisodes = EpisodesReducer({}, {
 			type: 'GET_EPISODES',
-			...episodes,
+			...infoAndResults,
 		});
-		expect(reducerGetEpisodes.info).equal(episodes.info);
-		expect(reducerGetEpisodes.results).equal(episodes.results);
+		expect(reducerGetEpisodes.info).equal(infoAndResults.info);
+		expect(reducerGetEpisodes.results).equal(infoAndResults.results);
 	});
 });

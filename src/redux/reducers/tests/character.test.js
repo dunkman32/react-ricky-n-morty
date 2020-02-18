@@ -16,6 +16,6 @@ describe('character reducer', () => {
 	});
 
 	it('should test reducer with defined state', () => {
-		expect(CharacterReducer({}, {type: 'GET_CHARACTER',...characterObj}).gender).equal(characterObj.gender);
+		expect(CharacterReducer({}, {type: 'GET_CHARACTER', character: characterObj}).character).equal(characterObj);
 	});
 });
