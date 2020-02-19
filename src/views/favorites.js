@@ -17,6 +17,7 @@ import TableSkeleton from '../components/skeletons/table-skeleton';
 import CharactersTable from '../components/characters/characters-table';
 import EpisodesTableForMobile from '../components/episodes/episodes-table-for-mobile';
 import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
+import EmptyFavoritesInfo from '../components/empty-favorites-info';
 
 const Favorites = props => {
 	const color = randomColor({luminosity: 'dark'});
@@ -26,7 +27,7 @@ const Favorites = props => {
 	const isCharacter = location.pathname === '/favorite-characters';
 
 	const haveLength = arrayEl => arrayEl && arrayEl.length;
-	const isRequestAllowed = isCharacter ? haveLength(charactersId): haveLength(episodesId) || false;
+	const isRequestAllowed = isCharacter ? haveLength(charactersId) : haveLength(episodesId) || false;
 
 	useEffect(() => {
 		if (isRequestAllowed || clickedFavoritesReducer.clicked) {
@@ -45,28 +46,35 @@ const Favorites = props => {
 			<>
 				<div className={'paper'}>
 					{
-						!isMobile ?
-							<CharactersTable
-								rows={returnRowsArray(charactersReducer.characters)} history={history}/> :
-							<CharactersTableForMobile
-								rows={returnRowsArray(charactersReducer.characters)}
-								history={history}/>
+						charactersReducer.characters.length ?
+							!isMobile ?
+								<CharactersTable rows={returnRowsArray(charactersReducer.characters)}
+									history={history}/> :
+								<CharactersTableForMobile rows={returnRowsArray(charactersReducer.characters)}
+									history={history}/>
+							: <EmptyFavoritesInfo link={location.pathname}
+								text={'there is no any favorite character, you should marked some characters as favorites'}/>
+
 					}
 				</div>
-				<Footer color={'black'} hurtColor={color} fixed={!charactersReducer.characters || charactersReducer.characters.length < 5}/>
+				<Footer color={'black'} hurtColor={color}
+					fixed={!charactersReducer.characters || charactersReducer.characters.length < 5}/>
 			</>
 			: <TableSkeleton/> : episodesReducer.episodes ?
 			<>
 				<div className={'paper'}>
-					{
+					{episodesReducer.episodes.length ?
 						!isMobile ?
-							<EpisodesTable main={false}
-								rows={returnRowsArray(episodesReducer.episodes)} history={history}/> :
-							<EpisodesTableForMobile main={false}
-								rows={returnRowsArray(episodesReducer.episodes)} history={history}/>
+							<EpisodesTable main={false} rows={returnRowsArray(episodesReducer.episodes)}
+								history={history}/> :
+							<EpisodesTableForMobile main={false} rows={returnRowsArray(episodesReducer.episodes)}
+								history={history}/>
+						: <EmptyFavoritesInfo link={location.pathname}
+							text={'there is no any favorite episode, you should marked some episodes as favorites'}/>
 					}
 				</div>
-				<Footer color={'black'} hurtColor={color} fixed={!episodesReducer.episodes || episodesReducer.episodes.length < 5}/>
+				<Footer color={'black'} hurtColor={color}
+					fixed={!episodesReducer.episodes || episodesReducer.episodes.length < 5}/>
 			</>
 			: <TableSkeleton/>
 		}
