@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 		padding: 10,
 		margin: 10,
 		display: 'inline-block',
-		['@media (min-width:600px)']: {
+		'@media (min-width:600px)': {
 			maxWidth: '360px',
 		},
 	},

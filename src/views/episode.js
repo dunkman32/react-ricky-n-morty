@@ -15,12 +15,12 @@ import './styles/episode.css';
 import './styles/sheared.css';
 
 const Episode = (props) => {
-	const {episodeReducer, match, history} = props;
+	const {episodeReducer, match, history, getEpisode} = props;
 	const {id} = match.params;
 
 	useEffect(() => {
-		props.getEpisode(id);
-	}, []);
+		getEpisode(id);
+	}, [getEpisode, id]);
 
 	return (
 		<div className='main'>

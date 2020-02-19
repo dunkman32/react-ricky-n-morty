@@ -12,9 +12,10 @@ const EpisodesTableForMobile = props => {
 	const {rows, history, setClicked, clicked, episodesReducer, main, getEpisodes, showFilterIcon} = props;
 	const [page, setPage] = React.useState(0);
 	const data = main ? episodesReducer.results : rows;
+
 	useEffect(() => {
 		if (main) getEpisodes({page: page + 1});
-	}, [page]);
+	}, [page, getEpisodes, main]);
 
 	return (
 		<div className={Css.root}>

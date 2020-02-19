@@ -21,7 +21,7 @@ const Character = (props) => {
 
 	useEffect(() => {
 		getCharacter(id);
-	}, []);
+	}, [getCharacter, id]);
 
 	return (
 		<div className={'main'}>

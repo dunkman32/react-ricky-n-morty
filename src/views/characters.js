@@ -7,10 +7,10 @@ import {isMobile} from 'react-device-detect';
 import CharactersTable from '../components/characters/characters-table';
 import Footer from '../components/footer/footer';
 import Header from '../components/header';
+import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
 
 import './styles/characters.css';
 import './styles/sheared.css';
-import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
 
 const Characters = props => {
 	const {charactersReducer, history} = props;

@@ -18,7 +18,7 @@ const SingleCharacterEpisodeTable = props => {
 
 	useEffect(() => {
 		getEpisodesById(takeEpisodesId(character.episode));
-	}, []);
+	}, [getEpisodesById, character.episode]);
 
 	return (
 		<div className={Css.table}>

@@ -61,7 +61,7 @@ const EpisodesTable = props => {
 
 	useEffect(() => {
 		if(main) getEpisodes({page: (page + 1)});
-	}, [page]);
+	}, [page, getEpisodes, main]);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';

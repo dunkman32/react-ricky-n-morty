@@ -9,7 +9,8 @@ import Moment from 'react-moment';
 import FavoriteIcon from '../favorite-icon';
 
 const EpisodeCardForMobile = (props) => {
-	const {id, name, air_date, episode, setClicked, clicked, created} = props.row;
+	const {id, name, air_date, episode, created} = props.row;
+	const {setClicked, clicked } = props;
 
 	const routeOnSingleEpisodePage = (event, id) => {
 		event.preventDefault();

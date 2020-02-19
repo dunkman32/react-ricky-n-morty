@@ -87,7 +87,7 @@ const CharactersTable = props => {
 		if (main) {
 			getCharacters({page: page + 1});
 		}
-	}, [page]);
+	}, [page, getCharacters, main]);
 
 	return (
 		<div className={classes.root}>

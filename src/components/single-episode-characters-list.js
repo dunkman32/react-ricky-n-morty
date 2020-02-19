@@ -5,38 +5,39 @@ import {connect} from 'react-redux';
 import SingleCharacter from './single-character';
 import {getCharactersById} from '../redux/actions/characters.action';
 
-const SingleEpisodeCharactersList = (props) => {
-	const {episode} = props.episodeReducer;
-	const {characters} = props.charactersReducer;
+const SingleEpisodeCharactersList = ({episodeReducer, charactersReducer, getCharactersById, history}) => {
+    const {episode} = episodeReducer;
+    const {characters} = charactersReducer;
 
-	const takeCharactersId = (chars) => chars.map(character => character.split('character/')[1]);
+    const takeCharactersId = (chars) => chars.map(character => character.split('character/')[1]);
 
-	useEffect(() => {
-		props.getCharactersById(takeCharactersId(episode.characters));
-	}, []);
+    useEffect(() => {
+        getCharactersById(takeCharactersId(episode.characters));
+    }, [getCharactersById, episode.characters]);
 
-	return episode && <div>
-		<div style={{width: '100% !important'}}>{characters && characters.map(character => <SingleCharacter
-			key={character.id} character={character} history={props.history}/>)}</div>
-	</div>;
+    return episode && <div>
+        <div style={{width: '100% !important'}}>
+            {characters && characters.map(character => <SingleCharacter
+                key={character.id} character={character} history={history}/>)}</div>
+    </div>;
 };
 
 SingleEpisodeCharactersList.propTypes = {
-	history: PropTypes.object.isRequired,
-	episodeReducer: PropTypes.object.isRequired,
-	charactersReducer: PropTypes.object.isRequired,
-	getCharactersById: PropTypes.func.isRequired
+    history: PropTypes.object.isRequired,
+    episodeReducer: PropTypes.object.isRequired,
+    charactersReducer: PropTypes.object.isRequired,
+    getCharactersById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-	charactersReducer: state.charactersReducer,
-	episodeReducer: state.episodeReducer,
+    charactersReducer: state.charactersReducer,
+    episodeReducer: state.episodeReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	getCharactersById: (ids) => {
-		dispatch(getCharactersById(ids));
-	},
+    getCharactersById: (ids) => {
+        dispatch(getCharactersById(ids));
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleEpisodeCharactersList);

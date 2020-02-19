@@ -6,7 +6,8 @@ import Button from '@material-ui/core/Button';
 import CharacterCardForMobile from './character-card-for-mobile';
 import {getCharacters} from '../../redux/actions/characters.action';
 import FilterTable from '../filter';
-import Css from './cheared.module.css'
+import Css from './cheared.module.css';
+
 const CharactersTableForMobile = props => {
 	const {rows, history, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
 	const [page, setPage] = React.useState(0);
@@ -14,7 +15,7 @@ const CharactersTableForMobile = props => {
 
 	useEffect(() => {
 		if(main) getCharacters({page: page + 1});
-	}, [page]);
+	}, [getCharacters, main, page]);
 
 	return (
 		<div className={Css.root}>

@@ -1,5 +1,6 @@
 const filter = word => {
-	const favorites = Array.apply(0, new Array(localStorage.length)).map((o, i) => localStorage.key(i));
+	const favorites = Array.apply(0, new Array(localStorage.length))
+		.map((o, i) => localStorage.key(i));
 	const favoritesId = favorites.filter(favorite => {
 		if(favorite.includes(word)){
 			return favorite;
