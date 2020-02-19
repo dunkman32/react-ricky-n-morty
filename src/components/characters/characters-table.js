@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CharactersTable = props => {
 	const classes = useStyles();
-	const {rows, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
+	const {rows, main, charactersReducer, getCharacters, showFilterIcon} = props;
 
 	const [openImageDialog, setOpenImageDialog] = React.useState(false);
 	const [order, setOrder] = React.useState('asc');
@@ -152,8 +152,7 @@ const CharactersTable = props => {
 												{row.gender}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon setClicked={setClicked} clicked={clicked}
-													style={{zIndex: 1000}} id={`characters-${row.id}`}/>
+												<FavoriteIcon style={{zIndex: 1000}} id={`characters-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);
@@ -182,8 +181,6 @@ CharactersTable.propTypes = {
 	rows: PropTypes.array,
 	main: PropTypes.bool,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool,
 	getCharacters: PropTypes.func.isRequired,
 	charactersReducer: PropTypes.object.isRequired,
 	showFilterIcon: PropTypes.bool

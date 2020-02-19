@@ -6,6 +6,7 @@ import EpisodeReducer from './episode.reducer';
 import EpisodesReducer from './episodes.reducer';
 import NotificationReducer from './notification.reducer';
 import LoadingReducer from './loading.reducer';
+import ClickedFavoritesReducer from './clicked-favorites.reducer';
 
 const allReducers = combineReducers({
 	charactersReducer: CharactersReducer,
@@ -13,7 +14,8 @@ const allReducers = combineReducers({
 	episodeReducer: EpisodeReducer,
 	episodesReducer: EpisodesReducer,
 	notificationReducer: NotificationReducer,
-	loadingReducer: LoadingReducer
+	loadingReducer: LoadingReducer,
+	clickedFavoritesReducer: ClickedFavoritesReducer,
 });
 
 export default allReducers;

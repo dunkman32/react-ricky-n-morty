@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {isMobile} from 'react-device-detect';
@@ -19,21 +19,20 @@ import EpisodesTableForMobile from '../components/episodes/episodes-table-for-mo
 import CharactersTableForMobile from '../components/characters/characters-table-for-mobile';
 
 const Favorites = props => {
-	const [clicked, setClicked] = useState(false);
 	const color = randomColor({luminosity: 'dark'});
 	const episodesId = takeFavoritesId('episodes');
 	const charactersId = takeFavoritesId('characters');
-	const {charactersReducer, history, getCharactersById, getEpisodesById, location, episodesReducer} = props;
+	const {charactersReducer, history, getCharactersById, getEpisodesById, location, episodesReducer, clickedFavoritesReducer} = props;
 	const isCharacter = location.pathname === '/favorite-characters';
 
 	const haveLength = arrayEl => arrayEl && arrayEl.length;
 	const isRequestAllowed = isCharacter ? haveLength(charactersId): haveLength(episodesId) || false;
 
 	useEffect(() => {
-		if (isRequestAllowed || clicked) {
+		if (isRequestAllowed || clickedFavoritesReducer.clicked) {
 			isCharacter ? getCharactersById(charactersId) : getEpisodesById(episodesId);
 		}
-	}, [clicked, isCharacter]);
+	}, [clickedFavoritesReducer.clicked, isCharacter]);
 
 	return <div className={'main'}>
 		<Header transparent/>
@@ -47,9 +46,9 @@ const Favorites = props => {
 				<div className={'paper'}>
 					{
 						!isMobile ?
-							<CharactersTable setClicked={setClicked} clicked={clicked}
+							<CharactersTable
 								rows={returnRowsArray(charactersReducer.characters)} history={history}/> :
-							<CharactersTableForMobile setClicked={setClicked} clicked={clicked}
+							<CharactersTableForMobile
 								rows={returnRowsArray(charactersReducer.characters)}
 								history={history}/>
 					}
@@ -61,9 +60,9 @@ const Favorites = props => {
 				<div className={'paper'}>
 					{
 						!isMobile ?
-							<EpisodesTable setClicked={setClicked} clicked={clicked} main={false}
+							<EpisodesTable main={false}
 								rows={returnRowsArray(episodesReducer.episodes)} history={history}/> :
-							<EpisodesTableForMobile setClicked={setClicked} clicked={clicked} main={false}
+							<EpisodesTableForMobile main={false}
 								rows={returnRowsArray(episodesReducer.episodes)} history={history}/>
 					}
 				</div>
@@ -76,7 +75,8 @@ const Favorites = props => {
 
 const mapStateToProps = state => ({
 	charactersReducer: state.charactersReducer,
-	episodesReducer: state.episodesReducer
+	episodesReducer: state.episodesReducer,
+	clickedFavoritesReducer: state.clickedFavoritesReducer
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -94,7 +94,8 @@ Favorites.propTypes = {
 	history: PropTypes.object.isRequired,
 	location: PropTypes.object.isRequired,
 	charactersReducer: PropTypes.object,
-	episodesReducer: PropTypes.object
+	episodesReducer: PropTypes.object,
+	clickedFavoritesReducer: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

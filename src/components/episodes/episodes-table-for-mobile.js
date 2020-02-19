@@ -9,7 +9,7 @@ import FilterTable from '../filter';
 import Css from './sheared.module.css';
 
 const EpisodesTableForMobile = props => {
-	const {rows, history, setClicked, clicked, episodesReducer, main, getEpisodes, showFilterIcon} = props;
+	const {rows, history, episodesReducer, main, getEpisodes, showFilterIcon} = props;
 	const [page, setPage] = React.useState(0);
 	const data = main ? episodesReducer.results : rows;
 
@@ -23,9 +23,8 @@ const EpisodesTableForMobile = props => {
 				data && <>
 					{showFilterIcon && <FilterTable isEpisode/>}
 					{
-						data.map(row => (!row.info && !row.results) &&(<div key={row.id}>
-							<EpisodeCardForMobile clicked={clicked} setClicked={setClicked} history={history}
-								row={row}/>
+						data.map(row => (!row.info && !row.results) && (<div key={row.id}>
+							<EpisodeCardForMobile history={history} row={row}/>
 						</div>))
 					}
 					{
@@ -33,7 +32,7 @@ const EpisodesTableForMobile = props => {
 							page !== 0 &&
                             <Button onClick={() => setPage(page - 1)}>prev</Button>
 						}{' '}{
-							episodesReducer.info.pages !== page + 1  &&
+							episodesReducer.info.pages !== page + 1 &&
                             <Button onClick={() => setPage(page + 1)}>next</Button>
 						}</>
 					}
@@ -46,8 +45,6 @@ const EpisodesTableForMobile = props => {
 EpisodesTableForMobile.propTypes = {
 	rows: PropTypes.array,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool,
 	getEpisodes: PropTypes.func.isRequired,
 	episodesReducer: PropTypes.object.isRequired,
 	main: PropTypes.bool,

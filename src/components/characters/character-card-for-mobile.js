@@ -12,7 +12,6 @@ import Css from './cheared.module.css';
 
 const CharacterCardForMobile = (props) => {
 	const {id, name, status, gender, image, created} = props.row;
-	const {clicked, setClicked} = props;
 
 	const handleClick = (event, id) => {
 		event.preventDefault();
@@ -41,7 +40,7 @@ const CharacterCardForMobile = (props) => {
 					<IconButton onClick={e => handleClick(e, id)}>
 						<Link/>
 					</IconButton>
-					<FavoriteIcon setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`characters-${id}`}/>
+					<FavoriteIcon style={{zIndex: 1000}} id={`characters-${id}`}/>
 				</Grid>
 			</Grid>
 		</Paper>
@@ -52,8 +51,6 @@ const CharacterCardForMobile = (props) => {
 CharacterCardForMobile.propTypes = {
 	row: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool
 };
 
 export default CharacterCardForMobile;

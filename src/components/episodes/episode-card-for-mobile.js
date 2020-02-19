@@ -10,7 +10,6 @@ import FavoriteIcon from '../favorite-icon';
 
 const EpisodeCardForMobile = (props) => {
 	const {id, name, air_date, episode, created} = props.row;
-	const {setClicked, clicked } = props;
 
 	const routeOnSingleEpisodePage = (event, id) => {
 		event.preventDefault();
@@ -33,7 +32,7 @@ const EpisodeCardForMobile = (props) => {
 					<IconButton onClick={e => routeOnSingleEpisodePage(e, id)}>
 						<Link/>
 					</IconButton>
-					<FavoriteIcon setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`episodes-${id}`}/>
+					<FavoriteIcon style={{zIndex: 1000}} id={`episodes-${id}`}/>
 				</Grid>
 			</Grid>
 		</Paper>
@@ -44,8 +43,6 @@ const EpisodeCardForMobile = (props) => {
 EpisodeCardForMobile.propTypes = {
 	row: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool
 };
 
 export default EpisodeCardForMobile;

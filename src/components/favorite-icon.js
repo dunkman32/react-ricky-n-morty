@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {Favorite} from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import {connect} from 'react-redux';
 
 const FavoriteIcon = (props) => {
-	const {id, clicked, setClicked} = props;
+	const {id, clickedFavoritesReducer, toggleButton} = props;
 	const [favorites, setFavorites] = React.useState({});
 	const [checked, setChecked] = React.useState(0);
 
@@ -15,7 +16,7 @@ const FavoriteIcon = (props) => {
 	};
 
 	const markAsFavorite = (id) => {
-		if(setClicked) setClicked(!clicked);
+		toggleButton(!clickedFavoritesReducer.clicked);
 		const saved = localStorage.getItem(id.toString());
 		if (saved) {
 			localStorage.removeItem(id.toString());
@@ -49,8 +50,22 @@ const FavoriteIcon = (props) => {
 
 FavoriteIcon.propTypes = {
 	id: PropTypes.any.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool,
+	toggleButton: PropTypes.func,
+	clickedFavoritesReducer: PropTypes.object
 };
 
-export default FavoriteIcon;
+
+const mapStateToProps = state => ({
+	clickedFavoritesReducer: state.clickedFavoritesReducer,
+});
+
+const mapDispatchToProps = dispatch => ({
+	toggleButton: condintionVal => {
+		dispatch({
+			type: 'TOGGLE',
+			clicked: condintionVal
+		});
+	},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteIcon);
