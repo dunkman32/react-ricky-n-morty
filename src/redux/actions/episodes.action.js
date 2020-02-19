@@ -1,15 +1,12 @@
-import {readEpisodes} from '../service/episodes.service';
-
+import {readEpisodes, readEpisodesById} from '../service/episodes.service';
 import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
 import toggleLoading from './loading.action';
-import {readCharactersById} from '../service/characters.service';
 
 const getEpisodes = params => {
-	let url = 'https://rickandmortyapi.com/api/episode';
 	return async dispatch => {
 		await dispatch(toggleLoading(true));
 		try {
-			const res = await readEpisodes(url, params);
+			const res = await readEpisodes(params);
 			if (res.data) {
 				const {info, results} = res.data;
 				dispatch({
@@ -30,7 +27,7 @@ const getEpisodes = params => {
 const getEpisodesById = ids => async dispatch => {
 	await dispatch(toggleLoading(true));
 	try {
-		const response = await readCharactersById(`https://rickandmortyapi.com/api/episode/${ids.join(',')}`);
+		const response = await readEpisodesById(ids);
 		if (response.data) {
 			const episodes = response.data;
 			dispatch({

@@ -1,12 +1,11 @@
 import {readEpisode} from '../service/episode.service';
-
 import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
 import toggleLoading from './loading.action';
 
 const getEpisode = id => async dispatch => {
 	await dispatch(toggleLoading(true));
 	try {
-		const res = await readEpisode(`https://rickandmortyapi.com/api/episode/${id}`);
+		const res = await readEpisode(`/api/episode/${id}`);
 		if (res.data) {
 			const episode = res.data;
 			dispatch({

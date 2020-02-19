@@ -1,12 +1,11 @@
 import {readCharacter} from '../service/character.service';
-
 import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
 import toggleLoading from './loading.action';
 
 const getCharacter = id => async dispatch => {
 	await dispatch(toggleLoading(true));
 	try {
-		const res = await readCharacter(`https://rickandmortyapi.com/api/character/${id}`);
+		const res = await readCharacter(id);
 		if (res.data) {
 			const character = res.data;
 			dispatch({

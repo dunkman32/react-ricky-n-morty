@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import {Link} from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip';
-import FavoriteIcon from "./favorite-icon";
+import FavoriteIcon from "../favorite-icon";
 
 const useStyles = makeStyles({
 	root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 		padding: 10,
 		margin: 10,
 		display: 'inline-block',
-		['@media (min-width:600px)']: {
+		'@media (min-width:600px)': {
 			maxWidth: '360px',
 		},
 	},

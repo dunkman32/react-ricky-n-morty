@@ -7,8 +7,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {makeStyles} from '@material-ui/core/styles';
 
-import bgImage from '../static/bgImage.jpg';
-import FavoriteIcon from './favorite-icon';
+import bgImage from '../../static/bgImage.jpg';
+import FavoriteIcon from '../favorite-icon';
 
 const useStyles = makeStyles({
 	root: {

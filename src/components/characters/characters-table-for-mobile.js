@@ -6,15 +6,16 @@ import Button from '@material-ui/core/Button';
 import CharacterCardForMobile from './character-card-for-mobile';
 import {getCharacters} from '../../redux/actions/characters.action';
 import FilterTable from '../filter';
-import Css from './cheared.module.css'
+import Css from './cheared.module.css';
+
 const CharactersTableForMobile = props => {
-	const {rows, history, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
+	const {rows, history, main, charactersReducer, getCharacters, showFilterIcon} = props;
 	const [page, setPage] = React.useState(0);
 	const data = main ? charactersReducer.results : rows;
 
 	useEffect(() => {
 		if(main) getCharacters({page: page + 1});
-	}, [page]);
+	}, [getCharacters, main, page]);
 
 	return (
 		<div className={Css.root}>
@@ -23,7 +24,7 @@ const CharactersTableForMobile = props => {
 					{showFilterIcon && <FilterTable/>}
 					{
 						data.map(row => (!row.info && !row.results) && <div key={row.id}>
-							<CharacterCardForMobile setClicked={setClicked} clicked={clicked} history={history} row={row}/>
+							<CharacterCardForMobile history={history} row={row}/>
 						</div>)
 					}
 					{
@@ -41,8 +42,6 @@ const CharactersTableForMobile = props => {
 CharactersTableForMobile.propTypes = {
 	rows: PropTypes.array,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool,
 	getCharacters: PropTypes.func.isRequired,
 	charactersReducer: PropTypes.object.isRequired,
 	main: PropTypes.bool,

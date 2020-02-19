@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -15,8 +15,9 @@ import {Tooltip} from '@material-ui/core';
 import FavoriteIcon from '../favorite-icon';
 import EnhancedTableHead from '../table-head';
 import {getComparator, stableSort} from '../../utils/table-utils';
-import CharactersImageDialog from '../characters-image-dialog';
+import CharactersImageDialog from './characters-image-dialog';
 import {getCharacters} from '../../redux/actions/characters.action';
+
 import FilterTable from '../filter';
 
 
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CharactersTable = props => {
 	const classes = useStyles();
-	const {rows, setClicked, clicked, main, charactersReducer, getCharacters, showFilterIcon} = props;
+	const {rows, main, charactersReducer, getCharacters, showFilterIcon} = props;
 
 	const [openImageDialog, setOpenImageDialog] = React.useState(false);
 	const [order, setOrder] = React.useState('asc');
@@ -87,7 +88,7 @@ const CharactersTable = props => {
 		if (main) {
 			getCharacters({page: page + 1});
 		}
-	}, [page]);
+	}, [page, getCharacters, main]);
 
 	return (
 		<div className={classes.root}>
@@ -151,8 +152,7 @@ const CharactersTable = props => {
 												{row.gender}
 											</TableCell>
 											<TableCell>
-												<FavoriteIcon setClicked={setClicked} clicked={clicked}
-													style={{zIndex: 1000}} id={`characters-${row.id}`}/>
+												<FavoriteIcon style={{zIndex: 1000}} id={`characters-${row.id}`}/>
 											</TableCell>
 										</TableRow>
 									);
@@ -181,8 +181,6 @@ CharactersTable.propTypes = {
 	rows: PropTypes.array,
 	main: PropTypes.bool,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool,
 	getCharacters: PropTypes.func.isRequired,
 	charactersReducer: PropTypes.object.isRequired,
 	showFilterIcon: PropTypes.bool

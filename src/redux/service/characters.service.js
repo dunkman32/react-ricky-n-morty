@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const readCharactersById = (url) => axios.get(url);
+const readCharactersById = (ids) => axios.get(`/api/character/${ids.join(',')}`);
 
-const readCharacters= (url, params) => axios.get(url, {params});
+const readCharacters = params => axios.get('/api/character', {params});
 
 export {
 	readCharactersById,

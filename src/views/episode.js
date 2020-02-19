@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 
-import SingleEpisodeCharactersList from '../components/single-episode-characters-list';
-import SingleEpisodeKeysList from '../components/single-episode-keys-list';
+import SingleEpisodeCharactersList from '../components/episode/single-episode-characters-list';
+import SingleEpisodeKeysList from '../components/episode/single-episode-keys-list';
 import {getEpisode} from '../redux/actions/episode.action';
 import IntegrationFbComments from '../components/integration-fb-comments';
 import SingleEpisodeSkeleton from '../components/skeletons/single-episode-skeleton';
@@ -15,12 +15,12 @@ import './styles/episode.css';
 import './styles/sheared.css';
 
 const Episode = (props) => {
-	const {episodeReducer, match, history} = props;
+	const {episodeReducer, match, history, getEpisode} = props;
 	const {id} = match.params;
 
 	useEffect(() => {
-		props.getEpisode(id);
-	}, []);
+		getEpisode(id);
+	}, [getEpisode, id]);
 
 	return (
 		<div className='main'>

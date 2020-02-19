@@ -9,7 +9,7 @@ import Moment from 'react-moment';
 import FavoriteIcon from '../favorite-icon';
 
 const EpisodeCardForMobile = (props) => {
-	const {id, name, air_date, episode, setClicked, clicked, created} = props.row;
+	const {id, name, air_date, episode, created} = props.row;
 
 	const routeOnSingleEpisodePage = (event, id) => {
 		event.preventDefault();
@@ -32,7 +32,7 @@ const EpisodeCardForMobile = (props) => {
 					<IconButton onClick={e => routeOnSingleEpisodePage(e, id)}>
 						<Link/>
 					</IconButton>
-					<FavoriteIcon setClicked={setClicked} clicked={clicked} style={{zIndex: 1000}} id={`episodes-${id}`}/>
+					<FavoriteIcon style={{zIndex: 1000}} id={`episodes-${id}`}/>
 				</Grid>
 			</Grid>
 		</Paper>
@@ -43,8 +43,6 @@ const EpisodeCardForMobile = (props) => {
 EpisodeCardForMobile.propTypes = {
 	row: PropTypes.object.isRequired,
 	history: PropTypes.object.isRequired,
-	setClicked: PropTypes.func,
-	clicked: PropTypes.bool
 };
 
 export default EpisodeCardForMobile;

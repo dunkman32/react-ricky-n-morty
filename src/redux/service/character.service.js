@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const readCharacter = (url) => axios.get(url);
+const readCharacter = (id) => axios.get(`/api/character/${id}`);
 
 export {
 	readCharacter,

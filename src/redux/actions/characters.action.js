@@ -1,12 +1,11 @@
 import {readCharactersById, readCharacters} from '../service/characters.service';
-
 import NotificationHandler, {NOTIFICATION_ERROR} from './notification.action';
 import toggleLoading from './loading.action';
 
 const getCharactersById = ids => async dispatch => {
 	await dispatch(toggleLoading(true));
 	try {
-		const response = await readCharactersById(`https://rickandmortyapi.com/api/character/${ids.join(',')}`);
+		const response = await readCharactersById(ids);
 		if (response.data) {
 			const characters = response.data;
 			dispatch({
@@ -25,7 +24,7 @@ const getCharactersById = ids => async dispatch => {
 const getCharacters = params => async dispatch => {
 	await dispatch(toggleLoading(true));
 	try {
-		const response = await readCharacters('https://rickandmortyapi.com/api/character', params);
+		const response = await readCharacters(params);
 		if (response.data) {
 			const {results, info} = response.data;
 			dispatch({
