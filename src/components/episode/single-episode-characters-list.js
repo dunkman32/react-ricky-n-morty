@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import SingleCharacter from './single-character';
-import {getCharactersById} from '../redux/actions/characters.action';
+import SingleCharacter from '../character/single-character';
+import {getCharactersById} from '../../redux/actions/characters.action';
 
 const SingleEpisodeCharactersList = ({episodeReducer, charactersReducer, getCharactersById, history}) => {
     const {episode} = episodeReducer;

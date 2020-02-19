@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -15,8 +15,9 @@ import {Tooltip} from '@material-ui/core';
 import FavoriteIcon from '../favorite-icon';
 import EnhancedTableHead from '../table-head';
 import {getComparator, stableSort} from '../../utils/table-utils';
-import CharactersImageDialog from '../characters-image-dialog';
+import CharactersImageDialog from './characters-image-dialog';
 import {getCharacters} from '../../redux/actions/characters.action';
+
 import FilterTable from '../filter';
 
 

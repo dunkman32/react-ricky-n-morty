@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import {Link} from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip';
-import FavoriteIcon from "./favorite-icon";
+import FavoriteIcon from "../favorite-icon";
 
 const useStyles = makeStyles({
 	root: {

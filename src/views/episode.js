@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 
-import SingleEpisodeCharactersList from '../components/single-episode-characters-list';
-import SingleEpisodeKeysList from '../components/single-episode-keys-list';
+import SingleEpisodeCharactersList from '../components/episode/single-episode-characters-list';
+import SingleEpisodeKeysList from '../components/episode/single-episode-keys-list';
 import {getEpisode} from '../redux/actions/episode.action';
 import IntegrationFbComments from '../components/integration-fb-comments';
 import SingleEpisodeSkeleton from '../components/skeletons/single-episode-skeleton';

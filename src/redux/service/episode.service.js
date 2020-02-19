@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const readEpisode = (url) => axios.get(url);
+const readEpisode = id => axios.get(id);
 
 export {
 	readEpisode,
